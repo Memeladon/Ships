@@ -27,6 +27,7 @@ body {
   flex-direction: column;
 }
 
+
 .social-icon,
 .menu {
   position: relative;
@@ -34,15 +35,6 @@ body {
   justify-content: center;
   align-items: center;
   margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.upmenu {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: center;
   flex-wrap: wrap;
 }
 
