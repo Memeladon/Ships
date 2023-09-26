@@ -19,8 +19,8 @@ Cross Origin Resource Sharing (CORS). Встроенный в FastAPI CORSMiddle
 '''
 
 origins = [
-    "http://127.0.0.1:8000",
-    "localhost:8000"
+    "http://localhost:3000",
+    "localhost:3000"
 ]
 
 app.add_middleware(
@@ -32,9 +32,9 @@ app.add_middleware(
 )
 # -------------------------------------------- Static dirs -------------------------------------------- #
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="./frontend/static"), name="static")
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="frontend/templates")
 
 # --------------------------------------------- Fast api ---------------------------------------------- #
 
