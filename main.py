@@ -2,12 +2,10 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.requests import Request
-from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 
 from core import settings
+from frontend.pages.router import router as router_pages
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
 
@@ -20,6 +18,7 @@ Cross Origin Resource Sharing (CORS). Встроенный в FastAPI CORSMiddle
 
 origins = [
     "http://localhost:3000",
+    "127.0.0.1:8000",
     "localhost:3000"
 ]
 
@@ -33,8 +32,8 @@ app.add_middleware(
 # -------------------------------------------- Static dirs -------------------------------------------- #
 
 app.mount("/static", StaticFiles(directory="./frontend/static"), name="static")
-
-templates = Jinja2Templates(directory="frontend/templates")
+# Отображение api
+app.include_router(router_pages)
 
 # --------------------------------------------- Fast api ---------------------------------------------- #
 
@@ -46,6 +45,3 @@ if __name__ == "__main__":
 # --------------------------------------------- Get Post ---------------------------------------------- #
 
 
-@app.get("/", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
