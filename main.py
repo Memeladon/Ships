@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from core import settings
+from backend.core import settings
 from frontend.pages.router import router as router_pages
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)

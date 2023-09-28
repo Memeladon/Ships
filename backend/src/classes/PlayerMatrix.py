@@ -1,4 +1,4 @@
-from src.classes.MatrixProcessing import MatrixProcessing
+from backend.src.classes.MatrixProcessing import MatrixProcessing
 
 
 class PlayerMatrix(MatrixProcessing):
