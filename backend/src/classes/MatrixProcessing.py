@@ -10,7 +10,7 @@ class MatrixProcessing(object):
         self.Matrix = np.zeros((amount_lines,amount_columns))
         pass
 
-    def ship_random_place (self, ships_size, amount_ships, matrix_for_place):
+    def __ship_random_place__ (self, ships_size, amount_ships, matrix_for_place):
         copy_matrix = matrix_for_place
         while (amount_ships!=0):
             print(amount_ships)
@@ -55,20 +55,21 @@ class MatrixProcessing(object):
 
 
     def random_place(self,amount_ship_types):
-        matrix_for_place = self.Matrix
+        matrix_for_place = self.Matrix.copy()
         x = amount_ship_types - 1
         for i in range (amount_ship_types,0,-1):
-            matrix_for_place = self.ship_random_place (i, amount_ship_types-x, matrix_for_place)
+            matrix_for_place = self.__ship_random_place__ (i, amount_ship_types-x, matrix_for_place)
             x = x - 1
+        print(self.Matrix.copy())
         return matrix_for_place
         pass
 
 
     def hide_ships(self):
-        self.Matrix[self.Matrix == 8] = 1
+        self.Matrix.copy()[self.Matrix.copy() == 8] = 1
 # 8 - кораблик
     def end_of_game(self):
-        result = np.any(self.Matrix == 8)
+        result = np.any(self.Matrix.copy() == 8)
         return result
 
 #tests
