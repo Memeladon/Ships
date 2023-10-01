@@ -3,17 +3,31 @@ import random
 
 
 class MatrixProcessing(object):
-    Matrix = np.zeros((10, 10))   # Создать нулевую матрицу размером 10x10
+    matrix = np.zeros((10, 10))   # Создать нулевую матрицу размером 10x10
+    hidden_war_place = matrix
+
+#либо сгенереную матрицу, либо None + количество строк + количество столбцов(размеры) матрицы для рандом расстановки
+    def __init__(self,given_matrix = None,amount_rows=None, amount_columns = None):
+
+        if given_matrix is None:
+            if (amount_rows == None or amount_columns == None):
+                print ("Или передайте матрицу или количество строк + количество столбцов")
+                exit(1)
+            self.matrix = np.zeros((amount_rows,amount_columns))
+            self.hidden_war_place = self.matrix
+
+        else:
+            num_rows = len (given_matrix)
+            num_columns = len(given_matrix[0])
+            self.matrix = given_matrix
+            self.hidden_war_place = np.zeros((num_rows,num_columns))
 
 
-    def __init__(self,amount_lines,amount_columns):
-        self.Matrix = np.zeros((amount_lines,amount_columns))
-        pass
 
+#Нужен для расстановки кораблей "по правилам" (метод random_place)
     def __ship_random_place__ (self, ships_size, amount_ships, matrix_for_place):
         copy_matrix = matrix_for_place
         while (amount_ships!=0):
-            print(amount_ships)
             copy_matrix = np.transpose(copy_matrix[::-1])
             for k in range(0,amount_ships):
 
@@ -53,26 +67,73 @@ class MatrixProcessing(object):
                         break
         return copy_matrix
 
-
+#Случайно расставляет корабли "по правилам"
     def random_place(self,amount_ship_types):
-        matrix_for_place = self.Matrix.copy()
+
+        is_zero_matrix = np.all(self.matrix == 0)
+        if is_zero_matrix == False:
+            self.matrix = self.matrix.fill(0)
+
+        matrix_for_place = self.matrix.copy()
+        start_rows = len(matrix_for_place)
         x = amount_ship_types - 1
         for i in range (amount_ship_types,0,-1):
             matrix_for_place = self.__ship_random_place__ (i, amount_ship_types-x, matrix_for_place)
             x = x - 1
-        print(self.Matrix.copy())
+
+        if start_rows != len(matrix_for_place):
+            matrix_for_place = np.transpose(matrix_for_place[::-1])
+        copy_matrix_for_place = matrix_for_place.copy()
+        copy_matrix_for_place[copy_matrix_for_place == 6] = 0
+        self.matrix = copy_matrix_for_place
         return matrix_for_place
+
+#Метод: проверяет разрушел ли корабль, при попадании и закрывает места, куда нет смысла стрелять.
+#i,j - координаты выстрела
+    def check_attacked_ship_state(self,i,j):
+
         pass
 
 
-    def hide_ships(self):
-        self.Matrix.copy()[self.Matrix.copy() == 8] = 1
 # 8 - кораблик
+#False - игра не закончена(есть кораблики)
+#True - конец игры (все корабли разбиты)
     def end_of_game(self):
-        result = np.any(self.Matrix.copy() == 8)
+        result = np.any(self.matrix.copy() == 8)
+        if result:
+            result = False
+        else:
+            result = True
         return result
 
+    def get_matrix(self):
+        return self.matrix
+
 #tests
-a = MatrixProcessing(15,17)
+a = MatrixProcessing(None,15,10)
 z = a.random_place(4)
-print (z)
+#print (z)
+print (a.get_matrix())
+
+mat = a.get_matrix()
+print (mat)
+
+b = MatrixProcessing(mat)
+print (b.get_matrix())
+
+
+
+
+# Ядро - представляет собой функцию на прологе имеющая одно правило ввода:
+# В матрице могут быть только три значения:
+# 0 - можно стрелять (вода)
+# 1 - нельзя стрелять (мимо или подбитый корабль)
+# 3 - поврежденный корабль.
+#
+# Матрица на вход, по сути своей, есть ход ИИ, а именно куда он будет стрелять
+#
+# I ,j - куда он будет стрелять
+#
+# Вход byte [][] - матрица боя
+#
+# Выход int i, int j - куда стреляет ИИ
