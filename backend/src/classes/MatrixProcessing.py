@@ -6,11 +6,10 @@ class MatrixProcessing(object):
     Matrix = np.zeros((10, 10))   # Создать нулевую матрицу размером 10x10
 
 
-    def __init__(self):
+    def __init__(self,amount_lines,amount_columns):
+        self.Matrix = np.zeros((amount_lines,amount_columns))
         pass
 
-
-#Слишком большой метод, надо будет оптимизировать код
     def ship_random_place (self, ships_size, amount_ships, matrix_for_place):
         copy_matrix = matrix_for_place
         while (amount_ships!=0):
@@ -19,45 +18,40 @@ class MatrixProcessing(object):
             for k in range(0,amount_ships):
 
                 check_place = True
-                vector = 1
-                if (vector == 1):
-                    i = random.randint(0,9)
-                    j = random.randint(0,9)
-                    if (j+ships_size<=9):
-                        for l in range (j,j+ships_size):
-                            if copy_matrix[i,l] == (6 or 8):
-                                check_place = False
-                                break
-                        if check_place == True:
-                            amount_ships = amount_ships - 1
-                            if (j-1 != -1):
-                                copy_matrix[i,j-1] = 6
-                                if ((i-1) !=-1):
-                                    copy_matrix[i-1,j-1] = 6
-                                if ((i+1) != 10):
-                                    copy_matrix[i+1,j-1] = 6
-
-                            if (j+ships_size != 10):
-                                copy_matrix[i,j+ships_size] = 6
-                                if (i-1 !=-1):
-                                    copy_matrix[i-1,j+ships_size] = 6
-                                if (i+1 != 10):
-                                    copy_matrix[i+1,j+ships_size] = 6
-
-
-                            for l in range(j,j+ships_size):
-                                copy_matrix[i,l] = 8
-                                if (i-1 !=-1):
-                                    copy_matrix[i-1,l] = 6
-                                if (i+1 != 10):
-                                    copy_matrix[i+1,l] = 6
-
-                        else:
+                i = random.randint(0,9)
+                j = random.randint(0,9)
+                if (j+ships_size<=9):
+                    for l in range (j,j+ships_size):
+                        if copy_matrix[i, l] in (6, 8):
+                            check_place = False
                             break
+                    if check_place == True:
+                        amount_ships = amount_ships - 1
+                        if (j-1 != -1):
+                            copy_matrix[i,j-1] = 6
+                            if ((i-1) !=-1):
+                                copy_matrix[i-1,j-1] = 6
+                            if ((i+1) != 10):
+                                copy_matrix[i+1,j-1] = 6
+
+                        if (j+ships_size != 10):
+                            copy_matrix[i,j+ships_size] = 6
+                            if (i-1 !=-1):
+                                copy_matrix[i-1,j+ships_size] = 6
+                            if (i+1 != 10):
+                                copy_matrix[i+1,j+ships_size] = 6
+
+
+                        for l in range(j,j+ships_size):
+                            copy_matrix[i,l] = 8
+                            if (i-1 !=-1):
+                                copy_matrix[i-1,l] = 6
+                            if (i+1 != 10):
+                                copy_matrix[i+1,l] = 6
+
+                    else:
+                        break
         return copy_matrix
-
-
-
 
 
     def random_place(self,amount_ship_types):
@@ -70,12 +64,6 @@ class MatrixProcessing(object):
         pass
 
 
-
-
-
-
-
-
     def hide_ships(self):
         self.Matrix[self.Matrix == 8] = 1
 # 8 - кораблик
@@ -84,19 +72,6 @@ class MatrixProcessing(object):
         return result
 
 #tests
-a = MatrixProcessing()
-# b = a.end_of_game()
-# print (b)
-# vector = random.randint(0,1)
-# for i in range(0,1):
-#     print (vector)
-# while (True):
-Matrix = np.zeros((10, 10))
+a = MatrixProcessing(15,17)
 z = a.random_place(4)
 print (z)
-#     pass
-# for i in range (4,0,-1):
-#     print(i)
-
-# vector = random.randint(0,1)
-# print (vector)
