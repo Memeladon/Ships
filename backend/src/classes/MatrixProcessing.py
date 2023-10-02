@@ -72,7 +72,7 @@ class MatrixProcessing(object):
 
         is_zero_matrix = np.all(self.matrix == 0)
         if is_zero_matrix == False:
-            self.matrix = self.matrix.fill(0)
+            self.matrix.fill(0)
 
         matrix_for_place = self.matrix.copy()
         start_rows = len(matrix_for_place)
@@ -111,10 +111,12 @@ class MatrixProcessing(object):
 
 #tests
 a = MatrixProcessing(None,15,10)
-z = a.random_place(4)
+a.random_place(4)
+
 #print (z)
 print (a.get_matrix())
 
+a.random_place(5)
 mat = a.get_matrix()
 print (mat)
 
