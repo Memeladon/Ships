@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<!--<link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">-->
+<style>
+    /* Стили для ячеек матрицы */
+    .cell {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ccc;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .hit {
+        background-color: #ff0000; /* Цвет для попадания */
+    }
+    .miss {
+        background-color: #00ff00; /* Цвет для промаха */
+    }
+</style>
+<script src={{ url_for('static', path="/connect.js") }}></script>
+
+{% endblock %}
+
+
+{% block content %}
+  <div>
+      <h1>Игра в морской бой</h1>
+      <div id="game-board"></div>
+  </div>
+{% endblock %}
