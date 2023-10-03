@@ -88,12 +88,6 @@ class MatrixProcessing(object):
         self.matrix = copy_matrix_for_place
         return matrix_for_place
 
-#Метод: проверяет разрушел ли корабль, при попадании и закрывает места, куда нет смысла стрелять.
-#i,j - координаты выстрела
-    def check_attacked_ship_state(self,i,j):
-
-        pass
-
 
 # 8 - кораблик
 #False - игра не закончена(есть кораблики)
