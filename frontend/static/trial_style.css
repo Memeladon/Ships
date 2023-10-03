@@ -1,0 +1,44 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e6f7ff; /* Светло-голубой цвет в качестве фона */
+}
+
+h2 {
+    text-align: center;
+    color: #333; /* Темно-серый цвет */
+    margin-bottom: 20px;
+}
+
+
+
+.board {
+    width: 48%;
+    float: left;
+    margin: 1%;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px; /* скругленные углы */
+    transition: transform 0.2s; /* анимация при наведении */
+}
+
+
+
+.battlefield {
+    margin: auto; /* центрирование таблицы */
+    border-collapse: collapse; /* объединение границ */
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #7da7d9; /* цвет границы */
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: background-color 0.3s; /* плавное изменение фона */
+}
+
+.cell:hover {
+    background-color: #e6f2ff; /* цвет при наведении */
+}
