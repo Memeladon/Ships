@@ -1,32 +1,13 @@
 {% extends "base.html" %}
 
 {% block head %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <!--<link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">-->
-<style>
-    /* Стили для ячеек матрицы */
-    .cell {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #ccc;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-    }
-    .hit {
-        background-color: #ff0000; /* Цвет для попадания */
-    }
-    .miss {
-        background-color: #00ff00; /* Цвет для промаха */
-    }
-</style>
-<script src={{ url_for('static', path="/connect.js") }}></script>
-
+<script src="{{ request.url_for('static', path='connect.js') }}"></script>
+<link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
 {% endblock %}
 
 
 {% block content %}
-<link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
 <main style="background-image: url('../static/img/black-abstract-background-wallpaper-image.jpg');">
     <section id="game-boards">
         <div class="boards-container">
@@ -62,8 +43,6 @@
 </section>
 </main>
 
-<footer>
-    <!-- Здесь ваш контент для подвала -->
-</footer>
-
 {% endblock %}
+
+{% include 'footer.html' %}
