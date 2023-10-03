@@ -6,11 +6,16 @@ var attemptedHits = [];
 function Fleet(name) {
   this.name = name;
   this.shipDetails = [
-    { name: "carrier", length: 5 },
-    { name: "battleship", length: 4 },
-    { name: "cruiser", length: 3 },
-    { name: "destroyer", length: 3 },
-    { name: "frigate", length: 2 }
+    { name: "Фрегат", length: 4 },
+    { name: "Каравелла", length: 3 },
+    { name: "Каравелла", length: 3 },
+    { name: "Драккар", length: 2 },
+    { name: "Драккар", length: 2 },
+    { name: "Драккар", length: 2 },
+    { name: "Шлюпка", length: 1 },
+    { name: "Шлюпка", length: 1 },
+    { name: "Шлюпка", length: 1 },
+    { name: "Шлюпка", length: 1 }
   ];
   this.numOfShips = this.shipDetails.length;
   this.ships = [];
@@ -75,28 +80,28 @@ function Ship(name) {
 
 // Console obj
 var output = {
-  welcome: " > Welcome to BattleShip.  Use the menu above to get started.",
-  not: " > This option is not currently available.",
+  welcome: " > Приветсвуем в морских сражения!. Воспользуйтесь меню, чтобы начать.",
+  not: " > Эта функция пока что не доступна.",
   player1:
-    " > Would you like to place your own ships or have the computer randomly do it for you?",
+    " > Хотите расставить корабли сами или воспользоваться случайной генерацией?",
   self:
-    " > Use the mouse and the Horizontal and Vertial buttons to place your ships on the bottom grid.",
-  overlap: " > You can not overlap ships.  Please try again.",
-  start: " > Use the mouse to fire on the top grid.  Good Luck!",
+    " > Используйте мышь и кнопки 'Горизонтально', 'Вертикально' чтобы расставить корабли на игровое поле.",
+  overlap: " > Вы не можете накладывать корабли друг на друга!. Попробуйте еще раз.",
+  start: " > Нажмите ПКМ для выстрела по ячейке вражеского поля,. Удачи!",
   placed: function (name) {
-    return " > Your " + name + " been placed.";
+    return " > Твой " + name + " был поставлен.";
   },
   hit: function (name, type) {
-    return " > " + name + "'s ship was hit.";
+    return " > Твой " + name + "' был ранен.";
   },
   miss: function (name) {
-    return " > " + name + " missed!";
+    return " > " + name + " Промах!";
   },
   sunk: function (user, type) {
-    return " > " + user + "'s " + type + " was sunk!";
+    return " > " + user + "'s " + type + " Потоплен!";
   },
   lost: function (name) {
-    return " > " + name + " has lost his fleet!!  Game Over.";
+    return " > " + name + " Потерял весь свой флот!!! Конец игры.";
   }
 };
 
@@ -584,10 +589,11 @@ $(document).ready(function () {
   });
 });
 
+// ФУНКЦИЯ МЕНЯЕТ 'ONE PLAYER' НА 'Place My Own' & 'Random' //
 function gameSetup(t) {
   $(t).off() && $(".two").off();
-  $(".one").addClass("self").removeClass("one").text("Place My Own");
-  $(".multi").addClass("random").removeClass("multi").text("Random");
+  $(".one").addClass("self").removeClass("one").text("Ручная расстановка");
+  $(".multi").addClass("random").removeClass("multi").text("Сгенерировать");
 
   $(".self")
     .off("click")
@@ -598,18 +604,19 @@ function gameSetup(t) {
   $(".random")
     .off("click")
     .on("click", function () {
-      playerFleet = new Fleet("Player 1");
+      playerFleet = new Fleet("Игрок 1");
       playerFleet.initShips();
       randomSetup(playerFleet);
     });
 }
 
+// ФУНКЦИЯ МЕНЯЕТ 'PLACE MY OWN' НА 'Horizontal' & 'Vertical' //
 function selfSetup() {
-  $(".self").addClass("horz").removeClass("self").text("Horizontal");
-  $(".random").addClass("vert").removeClass("random").text("Vertical");
+  $(".self").addClass("horz").removeClass("self").text("Горизонтально");
+  $(".random").addClass("vert").removeClass("random").text("Вертикально");
 
   // initialize the fleet
-  playerFleet = new Fleet("Player 1");
+  playerFleet = new Fleet("Игрок 1");
   playerFleet.initShips();
   // light up the players ship board for placement
   placeShip(playerFleet.ships[playerFleet.currentShip], playerFleet);
