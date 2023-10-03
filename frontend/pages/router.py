@@ -39,5 +39,6 @@ async def cell_click(cell_data: CellData):
 
     print(f"Выбрана ячейка с координатами ({i}, {j}), и значением {value}")
 
+    new_value = value + 1
     # Верните какой-либо ответ, если это необходимо
-    return {"message": f"Выбрана ячейка с координатами ({i}, {j}), и значением {value}"}
+    return {"i": i, "j": j, "value": new_value}

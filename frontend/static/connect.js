@@ -12,8 +12,13 @@ function cellClickHandler(cell) {
         },
         body: JSON.stringify({ i, j, value }),
     })
-    .then((response) => {
-        // Обработка ответа от сервера (если необходимо)
+    .then((response) => response.json())
+    .then((data) => {
+        // Обновите значение в ячейке
+        const cell = document.querySelector(`[data-i="${data.i}"][data-j="${data.j}"]`);
+        if (cell) {
+            cell.textContent = data.value;
+        }
     })
     .catch((error) => {
         console.error('Ошибка при отправке данных на сервер:', error);
