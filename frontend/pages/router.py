@@ -17,4 +17,4 @@ def get_base_page(request: Request):
 
 @router.get('/')
 def get_main_page(request: Request):
-    return templates.TemplateResponse("index.html", {'request': request})
+    return templates.TemplateResponse("trial.html", {'request': request})
