@@ -2,6 +2,7 @@
 function cellClickHandler(cell) {
     const i = cell.getAttribute('data-i');
     const j = cell.getAttribute('data-j');
+    const value = cell.getAttribute('data-value');
 
     // Отправляем координаты на сервер с помощью AJAX (XMLHttpRequest или Fetch API)
     fetch('/game/api/cell-click', {
@@ -9,11 +10,10 @@ function cellClickHandler(cell) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ i, j }),
+        body: JSON.stringify({ i, j, value }),
     })
     .then((response) => {
         // Обработка ответа от сервера (если необходимо)
-        console.log(0)
     })
     .catch((error) => {
         console.error('Ошибка при отправке данных на сервер:', error);

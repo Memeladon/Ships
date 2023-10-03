@@ -17,7 +17,7 @@
                     <tr>
                         {% for j in range(10) %}
                         <!-- Добавьте обработчик клика на каждую ячейку -->
-                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell" onclick="cellClickHandler(this)"></td>
+                        <td data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell" onclick="cellClickHandler(this)"></td>
                         {% endfor %}
                     </tr>
                     {% endfor %}
@@ -30,7 +30,7 @@
                     <tr>
                         {% for j in range(10) %}
                         <!-- Добавьте обработчик клика на каждую ячейку -->
-                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell" onclick="cellClickHandler(this)"></td>
+                        <td data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell" onclick="cellClickHandler(this)"></td>
                         {% endfor %}
                     </tr>
                     {% endfor %}

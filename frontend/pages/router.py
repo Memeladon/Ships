@@ -25,6 +25,7 @@ def get_main_page(request: Request):
 class CellData(BaseModel):
     i: int
     j: int
+    value: int
 
 
 # Обработчик POST-запроса для обработки выбранной ячейки
@@ -32,10 +33,11 @@ class CellData(BaseModel):
 async def cell_click(cell_data: CellData):
     i = cell_data.i
     j = cell_data.j
+    value = cell_data.value
 
     # Здесь вы можете обработать выбранную ячейку по координатам (i, j)
 
-    print(f"Выбрана ячейка с координатами ({i}, {j})")
+    print(f"Выбрана ячейка с координатами ({i}, {j}), и значением {value}")
 
     # Верните какой-либо ответ, если это необходимо
-    return {"message": f"Выбрана ячейка с координатами ({i}, {j})"}
+    return {"message": f"Выбрана ячейка с координатами ({i}, {j}), и значением {value}"}
