@@ -1,48 +1,46 @@
 {% extends "base.html" %}
 
 {% block head %}
-<!--<link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">-->
-<script src="{{ request.url_for('static', path='connect.js') }}"></script>
-<link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="{{ url_for('static', path='/connect.js') }}"></script>
 {% endblock %}
 
-
 {% block content %}
+<link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
 <main style="background-image: url('../static/img/black-abstract-background-wallpaper-image.jpg');">
     <section id="game-boards">
         <div class="boards-container">
             <div class="board player-board">
-            <!-- Матрица для игрока -->
-            <h4>Ваше поле</h4>
+                <h4>Ваше поле</h4>
                 <table>
                     {% for i in range(10) %}
                     <tr>
                         {% for j in range(10) %}
-                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+                        <!-- Добавьте обработчик клика на каждую ячейку -->
+                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell" onclick="cellClickHandler(this)"></td>
                         {% endfor %}
                     </tr>
                     {% endfor %}
                 </table>
             </div>
-
-
             <div class="board enemy-board">
-                <!-- Матрица для противника -->
                 <h4>Поле противника</h4>
                 <table>
                     {% for i in range(10) %}
                     <tr>
                         {% for j in range(10) %}
-                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+                        <!-- Добавьте обработчик клика на каждую ячейку -->
+                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell" onclick="cellClickHandler(this)"></td>
                         {% endfor %}
                     </tr>
                     {% endfor %}
                 </table>
             </div>
         </div>
-</section>
+    </section>
 </main>
-
+<footer>
+    <!-- Здесь ваш контент для подвала -->
+</footer>
 {% endblock %}
 
-{% include 'footer.html' %}

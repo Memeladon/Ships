@@ -1,30 +1,21 @@
-// Найдите все ячейки матрицы (может потребоваться более сложный селектор, в зависимости от структуры HTML)
-const cells = document.querySelectorAll('td');
+// Функция для обработки клика на ячейке
+function cellClickHandler(cell) {
+    const i = cell.getAttribute('data-i');
+    const j = cell.getAttribute('data-j');
 
-// Добавьте обработчик клика для каждой ячейки
-cells.forEach((cell) => {
-  cell.addEventListener('click', () => {
-    // Извлеките индексы (i, j) из атрибутов 'data-i' и 'data-j' ячейки
-    const i = parseInt(cell.getAttribute('data-i'));
-    const j = parseInt(cell.getAttribute('data-j'));
-
-    // Теперь у вас есть индексы (i, j), которые можно отправить на сервер или использовать в вашем коде
-    console.log(`Clicked on cell (${i}, ${j})`);
-
-    // Здесь вы можете отправить индексы на сервер, если это необходимо
-    // fetch('/your-api-endpoint', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ i, j }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     // Обработайте ответ от сервера, если необходимо
-    //   })
-    //   .catch((error) => {
-    //     console.error('Ошибка:', error);
-    //   });
-  });
-});
+    // Отправляем координаты на сервер с помощью AJAX (XMLHttpRequest или Fetch API)
+    fetch('/game/api/cell-click', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ i, j }),
+    })
+    .then((response) => {
+        // Обработка ответа от сервера (если необходимо)
+        console.log(0)
+    })
+    .catch((error) => {
+        console.error('Ошибка при отправке данных на сервер:', error);
+    });
+}
