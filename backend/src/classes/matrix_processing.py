@@ -102,62 +102,67 @@ class MatrixProcessing(object):
 
 
     def attack(self,i,j):
-
+        ans = ""
         if (self.matrix[i][j] == 0 or self.hidden_war_place[i][j] == 1): # попали в воду?
             self.hidden_war_place[i][j] = 1
+            ans = "miss"
         else:
             self.hidden_war_place[i][j] = 2
-            if (not ((i != 9 and (self.matrix[i + 1][j] == 8)) or
-                (i != 0 and (self.matrix[i - 1][j] == 8)) or
-                (j != 9 and (self.matrix[i][j + 1] == 8)) or
-                (j != 0 and (self.matrix[i][j - 1] == 8)))): # осталась ли хоть одна целая часть корабля
-
+            ans = "hit"
+            # осталась ли хоть одна целая часть корабля
+            if (not ((i != 9 and (self.matrix[i + 1][j] == 8)) or # справа
+                (i != 0 and (self.matrix[i - 1][j] == 8)) or # слева
+                (j != 9 and (self.matrix[i][j + 1] == 8)) or # вверх
+                (j != 0 and (self.matrix[i][j - 1] == 8)))):  # низ
                 if ((i != 9 and (self.hidden_war_place[i + 1][j] == 2)) or
                     (i != 0 and (self.hidden_war_place[i - 1][j] == 2))): # корабль вертикально стоит?
                     k = i
-                    while ((k != 0) and (self.hidden_war_place[k][j] == 2)):
-                        k = - 1
+                    while ((k != 0) and (self.hidden_war_place[k - 1][j] == 2)): # бежим вверх
+                        k -= 1
                     if k != 0:
                         k -= 1  # зашли за корабль
-                    while (self.hidden_war_place[k][j] == 2):
+                    while True: # бежим по кораблю обратно и закрашиваем 3 строки
                         self.hidden_war_place[k][j] = 1
                         if j != 9:
                             self.hidden_war_place[k][j + 1] = 1
                         if j != 0:
                             self.hidden_war_place[k][j - 1] = 1
-                        k = + 1
-                    if k != 9:
                         k += 1
+                        if (k == 9 or self.hidden_war_place[k][j] != 2):
+                            break
+
+                    if k != 10: # можно лизакрасить после корабля?
                         self.hidden_war_place[k][j] = 1
-                        if i != 9:
+                        if j != 9:
                             self.hidden_war_place[k][j + 1] = 1
-                        if i != 0:
+                        if j != 0:
                             self.hidden_war_place[k][j - 1] = 1
+                    ans = "break down"
                 else:
                     k = j
-                    while ((k != 0) and (self.hidden_war_place[i][k] == 2)): #бежим влево и ищем КОНЕЦ
-                        k =- 1
+                    while ((k != 0) and (self.hidden_war_place[i][k - 1] == 2)): #бежим влево и ищем КОНЕЦ
+                        k -= 1
                     if k != 0:
                         k -= 1  #зашли за корабль
-                    while (self.hidden_war_place[i][k] == 2): #бежим вправо до КОНЦА
+                    while True: #бежим вправо до КОНЦА
                         self.hidden_war_place[i][k] = 1
                         if i != 9:
                             self.hidden_war_place[i + 1][k] = 1
                         if i != 0:
                             self.hidden_war_place[i - 1][k] = 1
-                        k =+ 1
-                    if k != 9:
-                        k+=1
+                        k += 1
+                        if (k == 9 or self.hidden_war_place[i][k] != 2):
+                              break
+                    if k != 10:
                         self.hidden_war_place[i][k] = 1
                         if i != 9:
                             self.hidden_war_place[i + 1][k] = 1
                         if i != 0:
                             self.hidden_war_place[i - 1][k] = 1
+                    ans = "break down"
         self.matrix[i][j] = 0
 
 
 
     def get_hidden_war_place(self):
         return self.hidden_war_place
-
-
