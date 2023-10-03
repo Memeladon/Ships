@@ -103,6 +103,61 @@ class MatrixProcessing(object):
     def get_matrix(self):
         return self.matrix
 
+    def attack(self,i,j):
+        if (self.matrix[i][j] == 0): # попали в воду?
+            self.hidden_war_place[i][j] = 1
+        else:
+            self.hidden_war_place[i][j] = 2
+            if (not ((i != 9 and (self.matrix[i + 1][j] == 8)) or
+                (i != 0 and (self.matrix[i - 1][j] == 8)) or
+                (j != 9 and (self.matrix[i][j + 1] == 8)) or
+                (j != 0 and (self.matrix[i][j - 1] == 8)))): # осталась ли хоть одна целая часть корабля
+
+                if ((i != 9 and (self.hidden_war_place[i + 1][j] == 2)) or
+                    (i != 0 and (self.hidden_war_place[i - 1][j] == 2))): # корабль вертикально стоит?
+                    k = i
+                    while (k != 0 and self.hidden_war_place[k][j] == 2):
+                        k = - 1
+                    if k != 0:
+                        k -= 1  # зашли за корабль
+                    while (self.hidden_war_place[k][j] == 2):
+                        self.hidden_war_place[k][j] = 1
+                        if j != 9:
+                            self.hidden_war_place[k][j + 1] = 1
+                        if j != 0:
+                            self.hidden_war_place[k][j - 1] = 1
+                        k = + 1
+                    if k != 9:
+                        k += 1
+                        self.hidden_war_place[k][j] = 1
+                        if i != 9:
+                            self.hidden_war_place[k][j + 1] = 1
+                        if i != 0:
+                            self.hidden_war_place[k][j - 1] = 1
+                else:
+                    k = j
+                    while (k != 0 and self.hidden_war_place[i][k] == 2): #бежим влево и ищем КОНЕЦ мфм ахахахахаа хххах
+                        k =- 1
+                    if k != 0:
+                        k -= 1  #зашли за корабль
+                    while (self.hidden_war_place[i][k] == 2): #бежим вправо до КОНЦА хххахаха еще смешнее стало1!
+                        self.hidden_war_place[i][k] = 1
+                        if i != 9:
+                            self.hidden_war_place[i + 1][k] = 1
+                        if i != 0:
+                            self.hidden_war_place[i - 1][k] = 1
+                        k =+ 1
+                    if k != 9:
+                        k+=1
+                        self.hidden_war_place[i][k] = 1
+                        if i != 9:
+                            self.hidden_war_place[i + 1][k] = 1
+                        if i != 0:
+                            self.hidden_war_place[i - 1][k] = 1
+        self.matrix[i][j] = 0
+
+
+
 #tests
 a = MatrixProcessing(None,15,10)
 a.random_place(4)
