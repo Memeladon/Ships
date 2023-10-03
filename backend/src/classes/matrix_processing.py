@@ -100,19 +100,5 @@ class MatrixProcessing(object):
             result = True
         return result
 
-    def get_matrix(self):
-        return self.matrix
-
-#tests
-a = MatrixProcessing(None,15,10)
-a.random_place(4)
-
-#print (z)
-print (a.get_matrix())
-
-a.random_place(5)
-mat = a.get_matrix()
-print (mat)
-
-b = MatrixProcessing(mat)
-print (b.get_matrix())
+    def get_hidden_war_place(self):
+        return self.hidden_war_place
