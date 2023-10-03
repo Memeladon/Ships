@@ -26,34 +26,44 @@
 
 
 {% block content %}
-<table>
-  <tr>
-    <td data-i="0" data-j="0">(0, 0)</td>
-    <td data-i="0" data-j="1">(0, 1)</td>
-    <td data-i="0" data-j="1">(0, 2)</td>
-    <td data-i="0" data-j="1">(0, 3)</td>
-    <td data-i="0" data-j="1">(0, 4)</td>
-    <td data-i="0" data-j="1">(0, 5)</td>
-    <td data-i="0" data-j="1">(0, 6)</td>
-    <td data-i="0" data-j="1">(0, 7)</td>
-    <td data-i="0" data-j="1">(0, 8)</td>
-    <td data-i="0" data-j="1">(0, 9)</td>
-  </tr>
-  <tr>
-    <td data-i="0" data-j="0">(0, 0)</td>
-    <td data-i="0" data-j="1">(0, 1)</td>
-    <td data-i="0" data-j="1">(0, 2)</td>
-    <td data-i="0" data-j="1">(0, 3)</td>
-    <td data-i="0" data-j="1">(0, 4)</td>
-    <td data-i="0" data-j="1">(0, 5)</td>
-    <td data-i="0" data-j="1">(0, 6)</td>
-    <td data-i="0" data-j="1">(0, 7)</td>
-    <td data-i="0" data-j="1">(0, 8)</td>
-    <td data-i="0" data-j="1">(0, 9)</td>
-    <!-- Добавьте другие ячейки матрицы -->
-  </tr>
+<link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
+<main style="background-image: url('../static/img/black-abstract-background-wallpaper-image.jpg');">
+    <section id="game-boards">
+        <div class="boards-container">
+            <div class="board player-board">
+            <!-- Матрица для игрока -->
+            <h4>Ваше поле</h4>
+                <table>
+                    {% for i in range(10) %}
+                    <tr>
+                        {% for j in range(10) %}
+                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
 
-  <!-- Добавьте другие строки матрицы -->
-</table>
+
+            <div class="board enemy-board">
+                <!-- Матрица для противника -->
+                <h4>Поле противника</h4>
+                <table>
+                    {% for i in range(10) %}
+                    <tr>
+                        {% for j in range(10) %}
+                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+</section>
+</main>
+
+<footer>
+    <!-- Здесь ваш контент для подвала -->
+</footer>
 
 {% endblock %}
