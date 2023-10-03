@@ -100,6 +100,7 @@ class MatrixProcessing(object):
             result = True
         return result
 
+<<<<<<< HEAD:backend/src/classes/MatrixProcessing.py
     def get_matrix(self):
         return self.matrix
 
@@ -171,3 +172,7 @@ print (mat)
 
 b = MatrixProcessing(mat)
 print (b.get_matrix())
+=======
+    def get_hidden_war_place(self):
+        return self.hidden_war_place
+>>>>>>> d7d8e9bda8f22665d41762270872c56ce0a80cc9:backend/src/classes/matrix_processing.py
