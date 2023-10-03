@@ -804,7 +804,7 @@ function setShip(location, ship, orientation, genericFleet, type) {
 function checkOverlap(location, length, orientation, genFleet) {
   var loc = location;
   var adjacents = [-11, -10, -9, -1, 1, 9, 10, 11]; // Look at this sheet ETO JE SMESHENIE
-
+  // JOKERGE MOMENT
   if (orientation == "horz") {
     var end = location + length;
     for (; location < end; location++) {
