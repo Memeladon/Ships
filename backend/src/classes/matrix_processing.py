@@ -100,9 +100,6 @@ class MatrixProcessing(object):
             result = True
         return result
 
-<<<<<<< HEAD:backend/src/classes/MatrixProcessing.py
-    def get_matrix(self):
-        return self.matrix
 
     def attack(self,i,j):
         if (self.matrix[i][j] == 0): # попали в воду?
@@ -117,7 +114,7 @@ class MatrixProcessing(object):
                 if ((i != 9 and (self.hidden_war_place[i + 1][j] == 2)) or
                     (i != 0 and (self.hidden_war_place[i - 1][j] == 2))): # корабль вертикально стоит?
                     k = i
-                    while (k != 0 and self.hidden_war_place[k][j] == 2):
+                    while ((k != 0) and (self.hidden_war_place[k][j] == 2)):
                         k = - 1
                     if k != 0:
                         k -= 1  # зашли за корабль
@@ -137,7 +134,7 @@ class MatrixProcessing(object):
                             self.hidden_war_place[k][j - 1] = 1
                 else:
                     k = j
-                    while (k != 0 and self.hidden_war_place[i][k] == 2): #бежим влево и ищем КОНЕЦ мфм ахахахахаа хххах
+                    while ((k != 0) and (self.hidden_war_place[i][k] == 2)): #бежим влево и ищем КОНЕЦ мфм ахахахахаа хххах
                         k =- 1
                     if k != 0:
                         k -= 1  #зашли за корабль
@@ -158,21 +155,7 @@ class MatrixProcessing(object):
         self.matrix[i][j] = 0
 
 
-
-#tests
-a = MatrixProcessing(None,15,10)
-a.random_place(4)
-
-#print (z)
-print (a.get_matrix())
-
-a.random_place(5)
-mat = a.get_matrix()
-print (mat)
-
-b = MatrixProcessing(mat)
-print (b.get_matrix())
-=======
     def get_hidden_war_place(self):
         return self.hidden_war_place
->>>>>>> d7d8e9bda8f22665d41762270872c56ce0a80cc9:backend/src/classes/matrix_processing.py
+
+
