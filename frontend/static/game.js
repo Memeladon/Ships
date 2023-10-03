@@ -799,8 +799,12 @@ function setShip(location, ship, orientation, genericFleet, type) {
   }
 } // end of setShip()
 
+
+
 function checkOverlap(location, length, orientation, genFleet) {
   var loc = location;
+  var adjacents = [-11, -10, -9, -1, 1, 9, 10, 11]; // Look at this sheet ETO JE SMESHENIE
+
   if (orientation == "horz") {
     var end = location + length;
     for (; location < end; location++) {
@@ -809,8 +813,16 @@ function checkOverlap(location, length, orientation, genFleet) {
           if (genFleet == cpuFleet) randomSetup(genFleet);
           else return true;
         }
-      } // end of for loop
-    } // end of for loop
+
+        // Check on dickость(сосед?ство)
+        for (var j = 0; j < adjacents.length; j++) {
+          if (genFleet.ships[i].checkLocation(location + adjacents[j])) {
+            if (genFleet == cpuFleet) randomSetup(genFleet);
+            else return true;
+          }
+        }
+      }
+    }
   } else {
     var end = location + 10 * length;
     for (; location < end; location += 10) {
@@ -819,20 +831,27 @@ function checkOverlap(location, length, orientation, genFleet) {
           if (genFleet == cpuFleet) randomSetup(genFleet);
           else return true;
         }
+        // Check on dickость(сосед?ство)
+        for (var j = 0; j < adjacents.length; j++) {
+          if (genFleet.ships[i].checkLocation(location + adjacents[j])) {
+            if (genFleet == cpuFleet) randomSetup(genFleet);
+            else return true;
+          }
+        }
       }
     }
-  } // end of if/else
+  }
   if (genFleet == cpuFleet && genFleet.currentShip < genFleet.numOfShips) {
     if (orientation == "horz")
       genFleet.ships[genFleet.currentShip++].populateHorzHits(loc);
     else genFleet.ships[genFleet.currentShip++].populateVertHits(loc);
     if (genFleet.currentShip == genFleet.numOfShips) {
-      // clear the call stack
       setTimeout(startGame, 500);
     } else randomSetup(genFleet);
   }
   return false;
-} // end of checkOverlap()
+}
+
 
 function startGame() {
   $(".layout").fadeOut("fast", function () {
