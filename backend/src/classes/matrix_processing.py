@@ -102,7 +102,8 @@ class MatrixProcessing(object):
 
 
     def attack(self,i,j):
-        if (self.matrix[i][j] == 0): # попали в воду?
+
+        if (self.matrix[i][j] == 0 or self.hidden_war_place[i][j] == 1): # попали в воду?
             self.hidden_war_place[i][j] = 1
         else:
             self.hidden_war_place[i][j] = 2
@@ -134,11 +135,11 @@ class MatrixProcessing(object):
                             self.hidden_war_place[k][j - 1] = 1
                 else:
                     k = j
-                    while ((k != 0) and (self.hidden_war_place[i][k] == 2)): #бежим влево и ищем КОНЕЦ мфм ахахахахаа хххах
+                    while ((k != 0) and (self.hidden_war_place[i][k] == 2)): #бежим влево и ищем КОНЕЦ
                         k =- 1
                     if k != 0:
                         k -= 1  #зашли за корабль
-                    while (self.hidden_war_place[i][k] == 2): #бежим вправо до КОНЦА хххахаха еще смешнее стало1!
+                    while (self.hidden_war_place[i][k] == 2): #бежим вправо до КОНЦА
                         self.hidden_war_place[i][k] = 1
                         if i != 9:
                             self.hidden_war_place[i + 1][k] = 1
@@ -153,6 +154,7 @@ class MatrixProcessing(object):
                         if i != 0:
                             self.hidden_war_place[i - 1][k] = 1
         self.matrix[i][j] = 0
+
 
 
     def get_hidden_war_place(self):
