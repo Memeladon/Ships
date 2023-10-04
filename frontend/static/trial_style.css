@@ -1,19 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500|PT+Sans+Narrow:400,700|Play:400,700|Ubuntu+Condensed&display=swap&subset=cyrillic');
+
+@font-face {
+    font-family: Chalkduster;
+    src: url("../static/fonts/Chalkduster.ttf");
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Chalkduster', sans-serif;
     background-color: #e6f7ff; /* Светло-голубой цвет в качестве фона */
 }
 
-
 h2 {
+    font-family: 'Chalkduster', sans-serif;
+    background-color: #e6f7ff; /* Светло-голубой цвет в качестве фона */
     text-align: center;
     color: #333; /* Темно-серый цвет */
     margin-bottom: 20px;
+    border-radius: 10px 100px / 120px;
 }
 
-
+.boards-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 10%;
+    width: 100%;
+    min-width: 30%;
+    padding: 0 40px;
+}
 
 .board {
-    width: 48%;
+    width: 31%;
     float: left;
     margin: 1%;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -23,16 +40,14 @@ h2 {
     transition: transform 0.2s; /* анимация при наведении */
 }
 
-
-
 .battlefield {
     margin: auto; /* центрирование таблицы */
     border-collapse: collapse; /* объединение границ */
 }
 
 .cell {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border: 1px solid #7da7d9; /* цвет границы */
     text-align: center;
     vertical-align: middle;
@@ -42,4 +57,69 @@ h2 {
 
 .cell:hover {
     background-color: #e6f2ff; /* цвет при наведении */
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    height: 10%;
+    width: 100%;
+    min-width: 480px;
+    padding: 0 40px;
+}
+
+.buttons {
+    display: flex;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+    height: 40px;
+    transform: translateY(-50%);
+    z-index: 1;
+    justify-content: center;
+}
+
+.buttons__item {
+    height: 100%;
+    background-color: white;
+    color: #252525;
+    font-family: 'Chalkduster', sans-serif;
+    border-radius: 7px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    transform: skew(-21deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+    margin: 5px;
+    padding: 0 40px;
+    cursor: pointer;
+}
+
+.buttons__title {
+    font-family: 'Chalkduster', sans-serif;
+    color: #333; /* Темно-серый цвет */
+}
+
+img:not(:hover) {
+  transition: 2s;
+  filter: saturate(0%);
+  -webkit-filter: saturate(0%);
+  }
+img:hover {
+  transition: 1s;
+}
+
+/* Images */
+.bg-miss {
+    background: url("img/Ships_sprites_v1.3.png");
+    background-position:  -64px 0px;
+    width: 32px;
+    height: 32px;
 }

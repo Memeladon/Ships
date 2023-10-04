@@ -7,11 +7,12 @@
 
 {% block content %}
 <main>
+    <body>
     <section id="game-boards">
         <div class="boards-container">
             <div class="board player-board">
-                <h4>Ваше поле</h4>
-                <table>
+                <h2>Ваше поле</h2>
+                <table  class="battlefield">
                     {% for i in range(10) %}
                     <tr>
                         {% for j in range(10) %}
@@ -23,23 +24,51 @@
                 </table>
             </div>
             <div class="board enemy-board">
-                <h4>Поле противника</h4>
-                <table>
+                <h2>Поле противника</h2>
+                <table class="battlefield">
                     {% for i in range(10) %}
                     <tr>
                         {% for j in range(10) %}
                         <!-- Добавьте обработчик клика на каждую ячейку -->
                         <td data-matrix="{{ 'enemy' }}" data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell" onclick="cellClickHandler(this)"></td>
+
                         {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </table>
+                    </table>
+                </div>
+                <div class="board log-board">
+                    <h2>Лог боя</h2>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <section id="buttons-field">
+            <div class="buttons-container">
+                <ul class="buttons">
+                    <li class="buttons__item buttons__item-firstChild">
+                        <span class="buttons__inner">
+                            <span class="buttons__title">Random Placement</span>
+                        </span>
+                    </li>
+        <!--            <li class="buttons__item">-->
+        <!--                <span class="buttons__inner">-->
+        <!--                    <span class="buttons__title">Jokerge</span>-->
+        <!--                </span>-->
+        <!--            </li>-->
+                    <li class="buttons__item">
+
+                    </li>
+                    <li class="buttons__item buttons__item-lastChild">
+                        <span class="buttons__inner">
+                            <span class="buttons__title">Start Game</span>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+        </section>
+    </body>
 </main>
 <footer>
     <!-- Здесь ваш контент для подвала -->
 </footer>
 {% endblock %}
-
