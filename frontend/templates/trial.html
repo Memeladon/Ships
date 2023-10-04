@@ -1,41 +1,37 @@
 {% extends "base.html" %}
 
 {% block head %}
-<!--<link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">-->
-<script src="{{ request.url_for('static', path='connect.js') }}"></script>
 <link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
+<script src="{{ url_for('static', path='/matrix_post.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 <main>
     <body>
-        <section id="game-boards">
-            <div class="boards-container">
-                <div class="board player-board">
-                <!-- Матрица для игрока -->
+    <section id="game-boards">
+        <div class="boards-container">
+            <div class="board player-board">
                 <h2>Ваше поле</h2>
-                    <table class="battlefield">
-                        {% for i in range(10) %}
-                        <tr>
-                            {% for j in range(10) %}
-                            <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
-                            {% endfor %}
-                        </tr>
+                <table  class="battlefield">
+                    {% for i in range(10) %}
+                    <tr>
+                        {% for j in range(10) %}
+                        <!-- Добавьте обработчик клика на каждую ячейку -->
+                        <td data-matrix="{{ 'player' }}" data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell" onclick="cellClickHandler(this)"></td>
                         {% endfor %}
-                    </table>
-                </div>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="board enemy-board">
+                <h2>Поле противника</h2>
+                <table class="battlefield">
+                    {% for i in range(10) %}
+                    <tr>
+                        {% for j in range(10) %}
+                        <!-- Добавьте обработчик клика на каждую ячейку -->
+                        <td data-matrix="{{ 'enemy' }}" data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell" onclick="cellClickHandler(this)"></td>
 
-
-                <div class="board enemy-board">
-                    <!-- Матрица для противника -->
-                    <h2>Поле противника</h2>
-                    <table class="battlefield">
-                        {% for i in range(10) %}
-                        <tr>
-                            {% for j in range(10) %}
-                            <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
-                            {% endfor %}
-                        </tr>
                         {% endfor %}
                     </table>
                 </div>
@@ -72,5 +68,7 @@
         </section>
     </body>
 </main>
-
+<footer>
+    <!-- Здесь ваш контент для подвала -->
+</footer>
 {% endblock %}

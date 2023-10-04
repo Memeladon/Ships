@@ -17,9 +17,8 @@ Cross Origin Resource Sharing (CORS). Встроенный в FastAPI CORSMiddle
 '''
 
 origins = [
-    "http://localhost:3000",
     "127.0.0.1:8000",
-    "localhost:3000"
+    "localhost:8000"
 ]
 
 app.add_middleware(
