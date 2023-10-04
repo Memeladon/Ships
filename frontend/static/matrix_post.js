@@ -1,5 +1,6 @@
 // Функция для обработки клика на ячейке
 function cellClickHandler(cell) {
+    const matrix = cell.getAttribute('data-matrix');
     const i = cell.getAttribute('data-i');
     const j = cell.getAttribute('data-j');
     const value = cell.getAttribute('data-value');
@@ -10,12 +11,12 @@ function cellClickHandler(cell) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ i, j, value }),
+        body: JSON.stringify({ matrix, i, j, value }),
     })
     .then((response) => response.json())
     .then((data) => {
-        // Обновите значение в ячейке
-        const cell = document.querySelector(`[data-i="${data.i}"][data-j="${data.j}"]`);
+        // Обновите значение в ячейке только в соответствующей матрице
+        const cell = document.querySelector(`[data-matrix="${data.matrix}"][data-i="${data.i}"][data-j="${data.j}"]`);
         if (cell) {
             cell.textContent = data.value;
         }
