@@ -6,43 +6,71 @@
 <link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
 {% endblock %}
 
-
 {% block content %}
-<main style="background-image: url('../static/img/black-abstract-background-wallpaper-image.jpg');">
-    <section id="game-boards">
-        <div class="boards-container">
-            <div class="board player-board">
-            <!-- Матрица для игрока -->
-            <h4>Ваше поле</h4>
-                <table>
-                    {% for i in range(10) %}
-                    <tr>
-                        {% for j in range(10) %}
-                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+<main>
+    <body>
+        <section id="game-boards">
+            <div class="boards-container">
+                <div class="board player-board">
+                <!-- Матрица для игрока -->
+                <h2>Ваше поле</h2>
+                    <table class="battlefield">
+                        {% for i in range(10) %}
+                        <tr>
+                            {% for j in range(10) %}
+                            <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+                            {% endfor %}
+                        </tr>
                         {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
+                    </table>
+                </div>
 
 
-            <div class="board enemy-board">
-                <!-- Матрица для противника -->
-                <h4>Поле противника</h4>
-                <table>
-                    {% for i in range(10) %}
-                    <tr>
-                        {% for j in range(10) %}
-                        <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+                <div class="board enemy-board">
+                    <!-- Матрица для противника -->
+                    <h2>Поле противника</h2>
+                    <table class="battlefield">
+                        {% for i in range(10) %}
+                        <tr>
+                            {% for j in range(10) %}
+                            <td data-i="{{ i }}" data-j="{{ j }}" class="cell"></td>
+                            {% endfor %}
+                        </tr>
                         {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </table>
+                    </table>
+                </div>
+                <div class="board log-board">
+                    <h2>Лог боя</h2>
+                </div>
             </div>
-        </div>
-</section>
+        </section>
+        <section id="buttons-field">
+            <div class="buttons-container">
+                <ul class="buttons">
+                    <li class="buttons__item buttons__item-firstChild">
+                        <span class="buttons__inner">
+                            <span class="buttons__title">Random Placement</span>
+                        </span>
+                    </li>
+        <!--            <li class="buttons__item">-->
+        <!--                <span class="buttons__inner">-->
+        <!--                    <span class="buttons__title">Jokerge</span>-->
+        <!--                </span>-->
+        <!--            </li>-->
+                    <li class="buttons__item">
+
+                    </li>
+                    <li class="buttons__item buttons__item-lastChild">
+                        <span class="buttons__inner">
+                            <span class="buttons__title">Start Game</span>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+        </section>
+    </body>
 </main>
 
 {% endblock %}
-
-{% include 'footer.html' %}
