@@ -1,4 +1,3 @@
-// Функция для обработки клика на ячейке
 function cellClickHandler(cell) {
     const matrix = cell.getAttribute('data-matrix');
     const i = cell.getAttribute('data-i');
@@ -15,10 +14,18 @@ function cellClickHandler(cell) {
     })
     .then((response) => response.json())
     .then((data) => {
-        // Обновите значение в ячейке только в соответствующей матрице
+        // Получаем ссылку на ячейку
         const cell = document.querySelector(`[data-matrix="${data.matrix}"][data-i="${data.i}"][data-j="${data.j}"]`);
         if (cell) {
-            cell.textContent = data.value;
+            // Обновляем содержимое ячейки на основе значения data.value
+            if (data.value === 1) {
+                cell.innerHTML = '<img src="/static/miss.png" alt="Miss">';
+            } else if (data.value === 2) {
+                cell.innerHTML = '<img src="/static/hit.png" alt="Hit" >';
+            } else {
+                // Если значение не равно 1 или 2, можете сделать другую обработку по вашему усмотрению
+                cell.textContent = data.value;
+            }
         }
     })
     .catch((error) => {

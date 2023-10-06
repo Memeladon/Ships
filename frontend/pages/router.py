@@ -41,6 +41,8 @@ async def cell_click(cell_data: CellData):
 
     print(f"Выбрана ячейка с координатами ({i}, {j}), и значением {value}, в матрице \'{matrix}\'")
 
+    # 1 - miss
+    # 2 - hit
     new_value = value + 1
     # Верните какой-либо ответ, если это необходимо
     return {"i": i, "j": j, "value": new_value, 'matrix': matrix}
