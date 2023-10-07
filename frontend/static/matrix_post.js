@@ -19,9 +19,9 @@ function cellClickHandler(cell) {
         if (cell) {
             // Обновляем содержимое ячейки на основе значения data.value
             if (data.value === 1) {
-                cell.innerHTML = '<img src="/static/miss.png" alt="Miss">';
+                cell.classList.add("bg-miss");
             } else if (data.value === 2) {
-                cell.innerHTML = '<img src="/static/hit.png" alt="Hit" >';
+                cell.classList.add("bg-hit");
             } else {
                 // Если значение не равно 1 или 2, можете сделать другую обработку по вашему усмотрению
                 cell.textContent = data.value;
