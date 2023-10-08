@@ -1,5 +1,5 @@
 // Функция для обработки клика на кнопку 'Random Placement'
-function generateClickHandler() {
+function generateClickHandler(side) {
     // Отправляем запрос на сервер для получения сгенерированной матрицы
     fetch('/game/api/random_matrix', {
         method: 'GET', // GET запрос
@@ -7,8 +7,8 @@ function generateClickHandler() {
     .then((response) => response.json())
     .then((data) => {
         const generatedMatrix = data.generated_matrix;
-
-                // Маппинг значений на изображения
+//        if (side === "player")
+        // Маппинг значений на изображения
         const valueToImage = {
             0: 'empty.png',
             1: 'miss.png',
@@ -19,7 +19,7 @@ function generateClickHandler() {
         // Обновляем ячейки в текущей матрице на основе полученных данных
         generatedMatrix.forEach((row, i) => {
             row.forEach((value, j) => {
-                const cell = document.querySelector(`[data-matrix="player"][data-i="${i}"][data-j="${j}"]`);
+                const cell = document.querySelector(`[data-matrix="${side}"][data-i="${i}"][data-j="${j}"]`);
                 if (cell) {
                     // Обновляем значение ячейки
                     cell.setAttribute('data-value', value);
