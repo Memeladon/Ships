@@ -7,7 +7,7 @@ function addPlacementLog(message) {
     logEntry.textContent = `[${formattedTime}] ${message}`;
     logContainer.appendChild(logEntry);
 
-    logContainer.scrollTop = logContainer.scrollHeight;  // автоматическая прокрутка вниз
+    logContainer.scrollTop = logContainer.scrollHeight;  // автоматическая прокрутка вниз #must-have
 }
 
 function addBattleLog(playerName, x, y, status) {

@@ -46,7 +46,6 @@ h2 {
     background-color: #ffffff;
     border-radius: 8px; /* скругленные углы */
     transition: transform 0.2s; /* анимация при наведении */
-
 }
 
 .battlefield {
@@ -178,7 +177,13 @@ img:hover {
 /* Логи */
 
 .log-message {
-    font-family: Arial, sans-serif;
+    font-family: 'Chalkduster', sans-serif;
     color: #333;
     margin-bottom: 5px;
+    max-height: 310px;
+    overflow: auto;
+}
+
+.log-message::-webkit-scrollbar {
+    width: 0px;
 }

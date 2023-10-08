@@ -6,6 +6,7 @@
 <script src="{{ url_for('static', path='/random_matrix.js') }}"></script>
 <script src="{{ url_for('static', path='/start_game.js') }}"></script>
 <script src="{{ url_for('static', path='/battle_log.js') }}"></script>
+<script src="{{ url_for('static', path='/restart_game.js') }}"></script>
 <!--<script src="{{ url_for('static', path='/ship_placement.js') }}"></script>-->
 
 {% endblock %}
@@ -58,7 +59,9 @@
                         </span>
                     </li>
                     <li class="buttons__item">
-
+                        <span class="buttons__inner">
+                            <span class="buttons__title" onclick="restartGame()">Restart Game</span>
+                        </span>
                     </li>
                     <li class="buttons__item buttons__item-lastChild">
                         <span class="buttons__inner">
