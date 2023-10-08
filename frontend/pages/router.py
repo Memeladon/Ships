@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Form
 from fastapi.requests import Request
 from fastapi.templating import Jinja2Templates
 
@@ -11,11 +11,6 @@ router = APIRouter(
 
 templates = Jinja2Templates(directory='frontend/templates')
 
-
-# @router.get('/base')
-# def get_base_page(request: Request):
-#     return templates.TemplateResponse("base.html", {'request': request})
-#
 
 @router.get('/')
 def get_main_page(request: Request):
@@ -44,9 +39,6 @@ async def cell_click(cell_data: CellData):
 @router.get("/api/random_matrix")
 async def random_matrix():
 
-    print('click')
-    # Здесь вы можете обработать выбранную ячейку по координатам (i, j)
-
     generated_matrix = [
         [0, 0, 0, 0, 0, 8, 8, 8, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
@@ -62,3 +54,15 @@ async def random_matrix():
 
     # Верните какой-либо ответ, если это необходимо
     return {"generated_matrix": generated_matrix}
+
+
+@router.post("/api/update_matrix")
+async def update_matrix(
+        matrix: list[list[int]] = Form(...),  # Принимаем матрицу как параметр формы
+        matrix_name: str = Form(...),  # Принимаем имя матрицы (например, 'player' или 'enemy')
+ ):
+    # Здесь вы можете выполнить необходимую обработку матрицы
+    # Например, вы можете сохранить ее в базе данных или выполнять другие операции
+
+    # Вернем успешный статус, чтобы клиент знал, что матрица была обновлена
+    return {"message": f"Матрица '{matrix_name}' успешно обновлена"}

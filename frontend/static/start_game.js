@@ -31,6 +31,7 @@ function start_game() {
         const enemy_cells = document.querySelectorAll('.enemy-board .cell');
         for (let i = 0; i < enemy_cells.length; i++) {
             enemy_cells[i].setAttribute('onclick','cellClickHandler(this)');
+//        generateClickHandler('enemy') - эта штука не робит
         }
     }
 }
