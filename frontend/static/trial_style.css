@@ -72,6 +72,7 @@ h2 {
     display: flex;
     border-radius: 10px;
     margin: auto;
+    margin-top: 20px;
     text-align: center;
     top: 50%;
     width: 100%;
@@ -147,14 +148,14 @@ img:hover {
 
 .bg-ship-front {
     background: url("img/Ships_sprites_v1.3.png");
-    background-position: -32px 0px;
+    background-position: 0px -32px;
     width:32px;
     height: 32px;
 }
 
 .bg-ship-middle {
     background: url("img/Ships_sprites_v1.3.png");
-    background-position: -32px 0px;
+    background-position: 0px -64px;
     width:32px;
     height: 32px;
 }
