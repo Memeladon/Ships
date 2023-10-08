@@ -5,6 +5,11 @@
     src: url("../static/fonts/Chalkduster.ttf");
 }
 
+/* Запрещает выделять текст user-select: none; */
+* {
+    user-select: none;
+}
+
 body {
     font-family: 'Chalkduster', sans-serif;
     background-color: #e6f7ff; /* Светло-голубой цвет в качестве фона */
@@ -38,6 +43,7 @@ h2 {
     background-color: #ffffff;
     border-radius: 8px; /* скругленные углы */
     transition: transform 0.2s; /* анимация при наведении */
+
 }
 
 .battlefield {
