@@ -160,8 +160,16 @@ img:hover {
     height: 32px;
 }
 
-/*Расположение корабля через js*/
+/* Расположение корабля через js */
 
 .ship-cell {
     background-color: navy;
+}
+
+/* Логи */
+
+.log-message {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin-bottom: 5px;
 }
