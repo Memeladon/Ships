@@ -4,6 +4,8 @@
 <link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
 <script src="{{ url_for('static', path='/cell_post.js') }}"></script>
 <script src="{{ url_for('static', path='/random_matrix.js') }}"></script>
+<script src="{{ url_for('static', path='/start_game.js') }}"></script>
+<script src="{{ url_for('static', path='/battle_log.js') }}"></script>
 <!--<script src="{{ url_for('static', path='/ship_placement.js') }}"></script>-->
 
 {% endblock %}
@@ -33,7 +35,7 @@
                     <tr>
                         {% for j in range(10) %}
                         <!-- Добавьте обработчик клика на каждую ячейку -->
-                        <td data-matrix="{{ 'enemy' }}" data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell" onclick="cellClickHandler(this)"></td>
+                        <td data-matrix="{{ 'enemy' }}" data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell"></td>
                         {% endfor %}
                     </tr>
                     {% endfor %}
@@ -41,6 +43,9 @@
                 </div>
                 <div class="board log-board">
                     <h2>Лог боя</h2>
+                    <div class="log-message">
+
+                    </div>
                 </div>
             </div>
         </section>
@@ -57,7 +62,7 @@
                     </li>
                     <li class="buttons__item buttons__item-lastChild">
                         <span class="buttons__inner">
-                            <span class="buttons__title">Start Game</span>
+                            <span class="buttons__title" onclick="start_game()">Start Game</span>
                         </span>
                     </li>
 
