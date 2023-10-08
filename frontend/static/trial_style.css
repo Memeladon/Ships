@@ -159,4 +159,8 @@ img:hover {
     height: 32px;
 }
 
-/*Расположение корабля*/
+/*Расположение корабля через js*/
+
+.ship-cell {
+    background-color: navy;
+}

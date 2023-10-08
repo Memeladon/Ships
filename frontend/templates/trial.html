@@ -3,6 +3,8 @@
 {% block head %}
 <link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
 <script src="{{ url_for('static', path='/matrix_post.js') }}"></script>
+<script src="{{ url_for('static', path='/ship_placement.js') }}"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -46,7 +48,7 @@
                 <ul class="buttons">
                     <li class="buttons__item buttons__item-firstChild">
                         <span class="buttons__inner">
-                            <span class="buttons__title">Random Placement</span>
+                            <span class="buttons__title" onclick="initializeBoardAndRender()">Random Placement</span>
                         </span>
                     </li>
         <!--            <li class="buttons__item">-->
