@@ -22,6 +22,8 @@ function cellClickHandler(cell) {
             // Обновляем содержимое ячейки на основе значения data.value
             if (data.value === 1) {
                 cell.classList.add("bg-miss");
+                console.log("miss");
+                addBattleLog("Player", data.i, data.j, 1);
             } else if (data.value === 2) {
                 cell.classList.add("bg-hit");
             } else if (data.value === 8) {

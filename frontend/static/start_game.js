@@ -24,15 +24,13 @@ function start_game() {
     }
     else {
         addPlacementLog('Начало игры.');
-    }
-
-    const player_cells = document.querySelectorAll('.player-board .cell');
-    for (let i = 0; i < player_cells.length; i++) {
-        player_cells[i].removeAttribute('onclick');
-    }
-
-    const enemy_cells = document.querySelectorAll('.enemy-board .cell');
-    for (let i = 0; i < enemy_cells.length; i++) {
-        enemy_cells[i].setAttribute('onclick','cellClickHandler(this)');
+        const player_cells = document.querySelectorAll('.player-board .cell');
+        for (let i = 0; i < player_cells.length; i++) {
+            player_cells[i].removeAttribute('onclick');
+        }
+        const enemy_cells = document.querySelectorAll('.enemy-board .cell');
+        for (let i = 0; i < enemy_cells.length; i++) {
+            enemy_cells[i].setAttribute('onclick','cellClickHandler(this)');
+        }
     }
 }

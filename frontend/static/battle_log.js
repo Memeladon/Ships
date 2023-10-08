@@ -12,7 +12,7 @@ function addPlacementLog(message) {
 
 function addBattleLog(playerName, x, y, status) {
     const now = new Date();
-    const formattedTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString() + ':' + now.getSeconds().toString();
+    const formattedTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
     const logContainer = document.querySelector('.log-message');
 
     let message;
