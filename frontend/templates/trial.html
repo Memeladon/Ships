@@ -2,8 +2,9 @@
 
 {% block head %}
 <link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
-<script src="{{ url_for('static', path='/matrix_post.js') }}"></script>
-<script src="{{ url_for('static', path='/ship_placement.js') }}"></script>
+<script src="{{ url_for('static', path='/cell_post.js') }}"></script>
+<script src="{{ url_for('static', path='/random_matrix.js') }}"></script>
+<!--<script src="{{ url_for('static', path='/ship_placement.js') }}"></script>-->
 
 {% endblock %}
 
@@ -14,7 +15,7 @@
         <div class="boards-container">
             <div class="board player-board">
                 <h2>Ваше поле</h2>
-                <table  class="battlefield">
+                <table  class="battlefield" data-front="{{ 'player' }}">
                     {% for i in range(10) %}
                     <tr>
                         {% for j in range(10) %}
@@ -48,14 +49,9 @@
                 <ul class="buttons">
                     <li class="buttons__item buttons__item-firstChild">
                         <span class="buttons__inner">
-                            <span class="buttons__title" onclick="initializeBoardAndRender()">Random Placement</span>
+                            <span class="buttons__title" onclick="generateClickHandler()">Random Placement</span>
                         </span>
                     </li>
-        <!--            <li class="buttons__item">-->
-        <!--                <span class="buttons__inner">-->
-        <!--                    <span class="buttons__title">Jokerge</span>-->
-        <!--                </span>-->
-        <!--            </li>-->
                     <li class="buttons__item">
 
                     </li>
