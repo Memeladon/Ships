@@ -3,6 +3,8 @@
 {% block head %}
 <link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
 <script src="{{ url_for('static', path='/matrix_post.js') }}"></script>
+<script src="{{ url_for('static', path='/ship_placement.js') }}"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -31,9 +33,10 @@
                         {% for j in range(10) %}
                         <!-- Добавьте обработчик клика на каждую ячейку -->
                         <td data-matrix="{{ 'enemy' }}" data-i="{{ i }}" data-j="{{ j }}" data-value="{{ 0 }}" class="cell" onclick="cellClickHandler(this)"></td>
-
                         {% endfor %}
-                    </table>
+                    </tr>
+                    {% endfor %}
+                </table>
                 </div>
                 <div class="board log-board">
                     <h2>Лог боя</h2>
@@ -45,7 +48,7 @@
                 <ul class="buttons">
                     <li class="buttons__item buttons__item-firstChild">
                         <span class="buttons__inner">
-                            <span class="buttons__title">Random Placement</span>
+                            <span class="buttons__title" onclick="initializeBoardAndRender()">Random Placement</span>
                         </span>
                     </li>
         <!--            <li class="buttons__item">-->
