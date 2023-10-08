@@ -12,10 +12,10 @@ router = APIRouter(
 templates = Jinja2Templates(directory='frontend/templates')
 
 
-@router.get('/base')
-def get_base_page(request: Request):
-    return templates.TemplateResponse("base.html", {'request': request})
-
+# @router.get('/base')
+# def get_base_page(request: Request):
+#     return templates.TemplateResponse("base.html", {'request': request})
+#
 
 @router.get('/')
 def get_main_page(request: Request):
