@@ -61,6 +61,9 @@ async def update_matrix(
         matrix: list[list[int]] = Form(...),  # Принимаем матрицу как параметр формы
         matrix_name: str = Form(...),  # Принимаем имя матрицы (например, 'player' или 'enemy')
  ):
+    side = matrix_name
+    current_matrix = matrix
+
     # Здесь вы можете выполнить необходимую обработку матрицы
     # Например, вы можете сохранить ее в базе данных или выполнять другие операции
 

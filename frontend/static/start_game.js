@@ -23,6 +23,7 @@ function start_game() {
         addPlacementLog('Сначала расставьте корабли.');
     }
     else {
+        generateClickHandler('enemy');
         addPlacementLog('Начало игры.');
         const player_cells = document.querySelectorAll('.player-board .cell');
         for (let i = 0; i < player_cells.length; i++) {
@@ -31,7 +32,6 @@ function start_game() {
         const enemy_cells = document.querySelectorAll('.enemy-board .cell');
         for (let i = 0; i < enemy_cells.length; i++) {
             enemy_cells[i].setAttribute('onclick','cellClickHandler(this)');
-//        generateClickHandler('enemy') - эта штука не робит
         }
     }
 }

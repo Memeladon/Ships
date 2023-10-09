@@ -8,7 +8,6 @@ function generateClickHandler(side) {
     .then((response) => response.json())
     .then((data) => {
         const generatedMatrix = data.generated_matrix;
-//        if (side === "player")
         // Маппинг значений на изображения
         const valueToImage = {
             0: 'empty.png',
@@ -24,8 +23,10 @@ function generateClickHandler(side) {
                 if (cell) {
                     // Обновляем значение ячейки
                     cell.setAttribute('data-value', value);
-                    // Обновляем изображение
-                    cell.innerHTML = `<img src="${valueToImage[value]}" />`;
+                    // Обновляем изображение игроку
+                    if (side != "enemy") {
+                        cell.innerHTML = `<img src="${valueToImage[value]}" />`;
+                        }
                 }
             });
         });
