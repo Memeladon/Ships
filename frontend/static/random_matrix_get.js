@@ -24,9 +24,12 @@ function generateClickHandler(side) {
                     // Обновляем значение ячейки
                     cell.setAttribute('data-value', value);
                     // Обновляем изображение игроку
-                    if (side != "enemy") {
-                        cell.innerHTML = `<img src="${valueToImage[value]}" />`;
+                    if (side !== "enemy" && value == 8) {
+                        cell.classList.add('ship-cell');
                         }
+                    // if (side != "enemy") {
+                    //     cell.innerHTML = `<img src="${valueToImage[value]}" />`;
+                    //     }
                 }
             });
         });
