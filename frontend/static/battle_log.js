@@ -17,7 +17,7 @@ function addBattleLog(playerName, x, y, status) {
 
     let message;
     switch (status) {
-        case 8:
+        case 9:
             message = `Клетка (${x}, ${y}). Корабль поврежден!`;
             break;
         case 7:
