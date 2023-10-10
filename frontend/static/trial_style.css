@@ -129,6 +129,12 @@ h2 {
     color: #333; /* Темно-серый цвет */
 }
 
+.buttons__title.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;  // Предотвращаетвсекликиналемент
+}
+
 img:not(:hover) {
   transition: 2s;
   filter: saturate(0%);
