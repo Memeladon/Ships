@@ -1,6 +1,7 @@
 // Функция для обработки клика на кнопку 'Random Placement'
 function generateClickHandler(side) {
     console.log(side)
+    clearMatrix(side);
     // Отправляем запрос на сервер для получения сгенерированной матрицы
     fetch('/game/api/random_matrix', {
         method: 'GET', // GET запрос
@@ -36,5 +37,20 @@ function generateClickHandler(side) {
     })
     .catch((error) => {
         console.error('Ошибка при отправке запроса на сервер:', error);
+    });
+}
+
+// Функция для сделать матрицу нулевой
+function clearMatrix(side) {
+    const cells = document.querySelectorAll(`[data-matrix="${side}"]`);
+    cells.forEach((cell) => {
+        cell.setAttribute('data-value', 0); // Устанавливаем значение в 0
+        cell.classList.remove('ship-cell');
+
+        // Проверяем наличие изображения
+        const img = cell.querySelector('img');
+        if (img) {
+            img.remove();
+        }
     });
 }

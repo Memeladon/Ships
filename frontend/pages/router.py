@@ -10,6 +10,15 @@ import random
 #from pyswip import Prolog
 
 
+amount_types = 4
+battleground_rows = 10
+battleground_columns = 10
+
+bot = MatrixProcessing(None,battleground_rows,battleground_columns)
+
+
+
+
 
 router = APIRouter(
     prefix='/game',
@@ -46,18 +55,20 @@ async def cell_click(cell_data: CellData):
 @router.get("/api/random_matrix")
 async def random_matrix():
 
-    generated_matrix = [
-        [0, 0, 0, 0, 0, 8, 8, 8, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
-        [0, 0, 0, 0, 0, 0, 8, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 8, 0],
-        [0, 8, 8, 8, 0, 8, 8, 0, 8, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 8, 0],
-        [0, 0, 0, 8, 0, 0, 8, 0, 8, 0],
-        [0, 0, 0, 8, 0, 0, 0, 0, 0, 0],
-        [0, 8, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 8, 0, 0, 8, 0, 0, 0, 0, 0]
-    ]
+    # generated_matrix = [
+    #     [0, 0, 0, 0, 0, 8, 8, 8, 0, 0],
+    #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+    #     [0, 0, 0, 0, 0, 0, 8, 0, 0, 0],
+    #     [0, 0, 0, 0, 0, 0, 0, 0, 8, 0],
+    #     [0, 8, 8, 8, 0, 8, 8, 0, 8, 0],
+    #     [0, 0, 0, 0, 0, 0, 0, 0, 8, 0],
+    #     [0, 0, 0, 8, 0, 0, 8, 0, 8, 0],
+    #     [0, 0, 0, 8, 0, 0, 0, 0, 0, 0],
+    #     [0, 8, 0, 0, 0, 0, 0, 0, 0, 0],
+    #     [0, 8, 0, 0, 8, 0, 0, 0, 0, 0]
+    # ]
+    generated_matrix = bot.random_place(amount_types)
+
 
     # Верните какой-либо ответ, если это необходимо
     return {"generated_matrix": generated_matrix}
