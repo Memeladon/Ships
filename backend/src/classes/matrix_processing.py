@@ -3,7 +3,7 @@ import random
 
 
 class MatrixProcessing(object):
-    matrix = np.zeros((10, 10))  # Создать нулевую матрицу размером 10x10
+    matrix = np.zeros((10, 10),dtype=np.int32)  # Создать нулевую матрицу размером 10x10
     hidden_war_place = matrix
 
     # либо сгенереную матрицу, либо None + количество строк + количество столбцов(размеры) матрицы для рандом
@@ -14,18 +14,18 @@ class MatrixProcessing(object):
             if amount_rows is None or amount_columns is None:
                 print("Или передайте матрицу или количество строк + количество столбцов")
                 exit(1)
-            self.matrix = np.zeros((amount_rows, amount_columns))
+            self.matrix = np.zeros((amount_rows, amount_columns), dtype=np.int32)
             self.hidden_war_place = self.matrix
 
         else:
             num_rows = len(given_matrix)
             num_columns = len(given_matrix[0])
             self.matrix = given_matrix
-            self.hidden_war_place = np.zeros((num_rows, num_columns))
+            self.hidden_war_place = np.zeros((num_rows, num_columns),dtype=np.int32)
 
     # Нужен для расстановки кораблей "по правилам" (метод random_place)
     @staticmethod
-    def __ship_random_place__(self, ships_size, amount_ships, matrix_for_place):
+    def __ship_random_place__(ships_size, amount_ships, matrix_for_place):
         copy_matrix = matrix_for_place
         while amount_ships != 0:
             copy_matrix = np.transpose(copy_matrix[::-1])
@@ -85,7 +85,7 @@ class MatrixProcessing(object):
         copy_matrix_for_place = matrix_for_place.copy()
         copy_matrix_for_place[copy_matrix_for_place == 6] = 0
         self.matrix = copy_matrix_for_place
-        return matrix_for_place
+        return matrix_for_place.tolist()
 
     # 8 - кораблик
     # False - игра не закончена(есть кораблики)
@@ -161,3 +161,12 @@ class MatrixProcessing(object):
 
     def get_hidden_war_place(self):
         return self.hidden_war_place
+
+
+amount_types = 4
+battleground_rows = 10
+battleground_columns = 10
+
+bot = MatrixProcessing(None,battleground_rows,battleground_columns)
+bot.random_place(amount_types)
+print (bot.matrix)
