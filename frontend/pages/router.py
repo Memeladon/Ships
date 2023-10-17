@@ -12,7 +12,7 @@ amount_types = 4
 battleground_rows = 10
 battleground_columns = 10
 
-bot = MatrixProcessing(None, battleground_rows, battleground_columns)
+bot = MatrixProcessing(None,battleground_rows,battleground_columns)
 
 router = APIRouter(
     prefix='/game',
@@ -45,24 +45,16 @@ async def cell_click(cell_data: CellData):
     # Возвращай что-то такое: [[0,3,0,'enemy'][1,4,1,'player'][1,5,0,'player']]
     return {"i": i, "j": j, "value": new_value, 'matrix': matrix}
 
-
-@router.get("/api/random_matrix")
+@router.post("/api/initialize_matrix")
 async def random_matrix():
-    # generated_matrix = [
-    #     [0, 0, 0, 0, 0, 8, 8, 8, 0, 0],
-    #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
-    #     [0, 0, 0, 0, 0, 0, 8, 0, 0, 0],
-    #     [0, 0, 0, 0, 0, 0, 0, 0, 8, 0],
-    #     [0, 8, 8, 8, 0, 8, 8, 0, 8, 0],
-    #     [0, 0, 0, 0, 0, 0, 0, 0, 8, 0],
-    #     [0, 0, 0, 8, 0, 0, 8, 0, 8, 0],
-    #     [0, 0, 0, 8, 0, 0, 0, 0, 0, 0],
-    #     [0, 8, 0, 0, 0, 0, 0, 0, 0, 0],
-    #     [0, 8, 0, 0, 8, 0, 0, 0, 0, 0]
-    # ]
-    generated_matrix = bot.random_place(amount_types)
+
+    player = MatrixProcessing(None,battleground_rows,battleground_columns)
+    generated_matrix = player.random_place(amount_types)
 
     # Верните какой-либо ответ, если это необходимо
+
+    generated_matrix = bot.random_place(amount_types)
+
     return {"generated_matrix": generated_matrix}
 
 

@@ -3,8 +3,8 @@ function generateClickHandler(side) {
     console.log('random generated for ' + side)
     clearMatrix(side);
     // Отправляем запрос на сервер для получения сгенерированной матрицы
-    fetch('/game/api/random_matrix', {
-        method: 'GET', // GET запрос
+    fetch('/game/api/initialize_matrix', {
+        method: 'POST', 
     })
     .then((response) => response.json())
     .then((data) => {
