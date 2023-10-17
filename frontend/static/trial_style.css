@@ -59,7 +59,7 @@ h2 {
     border: 1px solid #7da7d9; /* цвет границы */
     text-align: center;
     vertical-align: middle;
-    cursor: pointer;
+    cursor: default;
     transition: background-color 0.3s; /* плавное изменение фона */
 }
 
@@ -151,6 +151,8 @@ img:hover {
     background-position:  -64px 0px;
     width: 32px;
     height: 32px;
+    pointer-events: none;
+
 }
 
 .bg-hit {
@@ -158,6 +160,7 @@ img:hover {
     background-position: -32px 0px;
     width:32px;
     height: 32px;
+    pointer-events: none;
 }
 
 .bg-ship-front {
@@ -165,6 +168,7 @@ img:hover {
     background-position: 0px -32px;
     width:32px;
     height: 32px;
+    pointer-events: none;
 }
 
 .bg-ship-middle {
@@ -172,12 +176,38 @@ img:hover {
     background-position: 0px -64px;
     width:32px;
     height: 32px;
+    pointer-events: none;
 }
 
 /* Расположение корабля через js */
 
 .ship-cell {
     background-color: navy;
+    pointer-events: none;
+}
+
+/* Drag&Drop = D&D */
+
+.ship {
+    height: 32px;
+    margin-bottom: 10px;
+    background-color: navy;
+}
+
+.fourdeck {
+    width: 128px;
+}
+
+.tripledeck {
+    width: 96px;
+}
+
+.doubledeck {
+    width: 64px;
+}
+
+.singledeck {
+    width: 32px;
 }
 
 /* Логи */

@@ -7,7 +7,9 @@ function is_ships_placed(Selector) {
         const cells = rows[i].querySelectorAll('td');
 
         for (let j = 0; j < cells.length; j++) {
-            sum += Number(cells[j].getAttribute('data-value'));
+            if (Number(cells[j].getAttribute('data-value')) === 8) {
+                sum += Number(cells[j].getAttribute('data-value'));
+            }
         }
     }
     console.log(`Сумма: ${sum}`);
