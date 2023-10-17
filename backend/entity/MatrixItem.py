@@ -2,8 +2,5 @@
 from pydantic import BaseModel
 
 
-class CellData(BaseModel):
-    matrix: str
-    i: int
-    j: int
-    value: int
+class MatrixItem(BaseModel):
+    matrix: list[list[int]]

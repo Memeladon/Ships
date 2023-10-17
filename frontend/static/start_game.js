@@ -26,7 +26,11 @@ function start_game() {
         addPlacementLog('Сначала расставьте корабли.');
     }
     else {
+//      Генерация рандомной матрицы для бота
         generateClickHandler('enemy');
+//      Отправка матрицы для обработки
+        save_player_matrix()
+
         addPlacementLog('Начало игры.');
         randomPlacementButton.classList.add('disabled');
         startGameButton.classList.add('disabled');
