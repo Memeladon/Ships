@@ -135,6 +135,8 @@ class MatrixProcessing(object):
                             self.hidden_war_place[k][j + 1] = 1
                         if j != 0:
                             self.hidden_war_place[k][j - 1] = 1
+
+                    
                     ans = "break down"
                 else:
                     k = j
@@ -151,6 +153,7 @@ class MatrixProcessing(object):
                             self.hidden_war_place[i - 1][k] = 1
                         k += 1
                         if k == 9 or self.hidden_war_place[i][k] != 2:
+
                             break
                     self.hidden_war_place[i][kk] = 1
                     if k != 10:
@@ -159,27 +162,47 @@ class MatrixProcessing(object):
                             self.hidden_war_place[i + 1][k] = 1
                         if i != 0:
                             self.hidden_war_place[i - 1][k] = 1
+                    
                     ans = "break down"
         if self.matrix[i][j] == 8:
             self.matrix[i][j] = 7
         else:
-            self.matrix[i][j] = 0
+            self.matrix[i][j] = 1
 
 
     def get_hidden_war_place(self):
-        return self.hidden_war_place
+        return self.hidden_war_place.tolist()
 
 
 amount_types = 4
 battleground_rows = 10
 battleground_columns = 10
 
-bot = MatrixProcessing(None,battleground_rows,battleground_columns)
-bot.random_place(amount_types)
+matrix = np.array([
+    [0, 0, 0, 0, 0, 8, 0, 0, 0, 0],
+    [0, 8, 0, 8, 0, 0, 0, 0, 0, 8],
+    [0, 0, 0, 8, 0, 8, 0, 0, 0, 8],
+    [0, 0, 0, 8, 0, 8, 0, 0, 0, 8],
+    [0, 0, 0, 8, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 8, 0, 0, 0],
+    [8, 8, 0, 8, 0, 0, 0, 0, 0, 8],
+    [0, 0, 0, 0, 0, 8, 8, 8, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 8, 8, 0, 0, 0, 0, 0, 0]
+], dtype=np.int32)
 
-for i in range (10):
-    for j in range (10):
+bot = MatrixProcessing(matrix)
+
+
+for i in range (7):
+    for j in range (7):
         bot.attack(i,j)
 
 print (bot.hidden_war_place)
 print (bot.matrix)
+
+            # 0: 'empty.png',
+            # 1: 'miss.png',
+            # 8: 'ship.png',
+            # 7: 'hit.png'
+

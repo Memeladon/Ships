@@ -34,6 +34,7 @@ async def cell_click(cell_data: CellData):
     i = cell_data.i
     j = cell_data.j
     value = cell_data.value
+    #Дописать условияя, возвращать список списков аттак
 
     # Здесь вы можете обработать выбранную ячейку по координатам (i, j)
 
