@@ -85,7 +85,7 @@ class MatrixProcessing(object):
         copy_matrix_for_place = matrix_for_place.copy()
         copy_matrix_for_place[copy_matrix_for_place == 6] = 0
         self.matrix = copy_matrix_for_place
-        return matrix_for_place.tolist()
+        return self.matrix.tolist()
 
     # 8 - кораблик
     # False - игра не закончена(есть кораблики)
@@ -118,8 +118,9 @@ class MatrixProcessing(object):
                         k -= 1
                     if k != 0:
                         k -= 1  # зашли за корабль
+                    kk = k
                     while True:  # бежим по кораблю обратно и закрашиваем 3 строки
-                        self.hidden_war_place[k][j] = 1
+                        self.hidden_war_place[k][j] = 7
                         if j != 9:
                             self.hidden_war_place[k][j + 1] = 1
                         if j != 0:
@@ -127,9 +128,9 @@ class MatrixProcessing(object):
                         k += 1
                         if k == 9 or self.hidden_war_place[k][j] != 2:
                             break
-
-                    if k != 10:  # можно лизакрасить после корабля?
-                        self.hidden_war_place[k][j] = 1
+                    self.hidden_war_place[kk][j] = 1
+                    if k != 10:  # можно ли закрасить после корабля?
+                        self.hidden_war_place[k][j] = 7
                         if j != 9:
                             self.hidden_war_place[k][j + 1] = 1
                         if j != 0:
@@ -141,8 +142,9 @@ class MatrixProcessing(object):
                         k -= 1
                     if k != 0:
                         k -= 1  # зашли за корабль
+                    kk = k
                     while True:  # бежим вправо до КОНЦА
-                        self.hidden_war_place[i][k] = 1
+                        self.hidden_war_place[i][k] = 7
                         if i != 9:
                             self.hidden_war_place[i + 1][k] = 1
                         if i != 0:
@@ -150,14 +152,19 @@ class MatrixProcessing(object):
                         k += 1
                         if k == 9 or self.hidden_war_place[i][k] != 2:
                             break
+                    self.hidden_war_place[i][kk] = 1
                     if k != 10:
-                        self.hidden_war_place[i][k] = 1
+                        self.hidden_war_place[i][k] = 7
                         if i != 9:
                             self.hidden_war_place[i + 1][k] = 1
                         if i != 0:
                             self.hidden_war_place[i - 1][k] = 1
                     ans = "break down"
-        self.matrix[i][j] = 0
+        if self.matrix[i][j] == 8:
+            self.matrix[i][j] = 7
+        else:
+            self.matrix[i][j] = 0
+
 
     def get_hidden_war_place(self):
         return self.hidden_war_place
@@ -169,4 +176,10 @@ battleground_columns = 10
 
 bot = MatrixProcessing(None,battleground_rows,battleground_columns)
 bot.random_place(amount_types)
+
+for i in range (10):
+    for j in range (10):
+        bot.attack(i,j)
+
+print (bot.hidden_war_place)
 print (bot.matrix)
