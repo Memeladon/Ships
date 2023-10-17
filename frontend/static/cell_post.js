@@ -1,10 +1,10 @@
 function cellClickHandler(cell) {
-    if (cell.classList.contains('bg-miss') || cell.classList.contains('bg-hit') || cell.classList.contains('ship-cell')) {
-        return;
-    }
-    if (cell.getAttribute('data-matrix') === 'player') {
-        return;
-    }
+    // if (cell.classList.contains('bg-miss') || cell.classList.contains('bg-hit') || cell.classList.contains('ship-cell')) {
+    //     return;
+    // }
+    // if (cell.getAttribute('data-matrix') === 'player') {
+    //     return;
+    // }
     const matrix = cell.getAttribute('data-matrix');
     const i = cell.getAttribute('data-i');
     const j = cell.getAttribute('data-j');

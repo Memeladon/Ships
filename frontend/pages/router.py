@@ -1,13 +1,11 @@
-from fastapi import APIRouter, Form
+from fastapi import APIRouter
 from fastapi.requests import Request
 from fastapi.templating import Jinja2Templates
 
-from backend.entity.cell import CellData
-
-
+from backend.entity import (CellData, MatrixItem)
 from backend.src.classes.matrix_processing import MatrixProcessing
-import random
-#from pyswip import Prolog
+
+# from pyswip import Prolog
 
 
 amount_types = 4
@@ -60,16 +58,12 @@ async def random_matrix():
     return {"generated_matrix": generated_matrix}
 
 
-@router.post("/api/update_matrix")
-async def update_matrix(
-        matrix: list[list[int]] = Form(...),  # Принимаем матрицу как параметр формы
-        matrix_name: str = Form(...),  # Принимаем имя матрицы (например, 'player' или 'enemy')
- ):
-    side = matrix_name
-    current_matrix = matrix
+@router.post("/api/save_matrix")
+async def save_matrix(matrix_item: MatrixItem):
+    player_matrix = matrix_item.matrix
 
     # Здесь вы можете выполнить необходимую обработку матрицы
     # Например, вы можете сохранить ее в базе данных или выполнять другие операции
 
     # Вернем успешный статус, чтобы клиент знал, что матрица была обновлена
-    return {"message": f"Матрица '{matrix_name}' успешно обновлена"}
+    return {"message": f"Матрица '{player_matrix}' сохранена"}

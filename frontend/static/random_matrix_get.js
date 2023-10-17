@@ -25,7 +25,7 @@ function generateClickHandler(side) {
                     // Обновляем значение ячейки
                     cell.setAttribute('data-value', value);
                     // Обновляем изображение игроку
-                    if (side !== "enemy" && value == 8) {
+                    if (side !== "enemy" && value === 8) {
                         cell.classList.add('ship-cell');
                         }
                     // if (side != "enemy") {
