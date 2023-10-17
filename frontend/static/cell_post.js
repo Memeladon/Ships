@@ -1,10 +1,4 @@
 function cellClickHandler(cell) {
-    // if (cell.classList.contains('bg-miss') || cell.classList.contains('bg-hit') || cell.classList.contains('ship-cell')) {
-    //     return;
-    // }
-    // if (cell.getAttribute('data-matrix') === 'player') {
-    //     return;
-    // }
     const matrix = cell.getAttribute('data-matrix');
     const i = cell.getAttribute('data-i');
     const j = cell.getAttribute('data-j');
@@ -20,30 +14,38 @@ function cellClickHandler(cell) {
     })
     .then((response) => response.json())
     .then((data) => {
-        // Получаем ссылку на ячейку
-        const cell = document.querySelector(`[data-matrix="${data.matrix}"][data-i="${data.i}"][data-j="${data.j}"]`);
+        // Проходим по массиву массивов и обновляем ячейки
+        for (const item of data) {
+            const row = item[0];
+            const col = item[1];
+            const cellValue = item[2];
+            const targetMatrix = item[3];
 
-        if (cell) {
-            // Обновляем содержимое ячейки на основе значения data.value
-            if (data.value === 1) {
-                cell.classList.add("bg-miss");
-                console.log("miss");
-                addBattleLog("Player", data.i, data.j, 1);
-            } else if (data.value === 2) {
-                cell.classList.add("bg-miss");
-                addBattleLog("Player", data.i, data.j, 1);
-            } else if (data.value === 8) {
-                cell.classList.add("bg-ship-front");
-                addBattleLog("Player", data.i, data.j, 1);
-            } else if (data.value === 9) {
-                cell.classList.add("bg-hit");
-                addBattleLog("Player", data.i, data.j, 9);
-            } else {
+            // Получаем ссылку на ячейку
+            const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
 
-                // Если значение не равно 1 или 2, можете сделать другую обработку по вашему усмотрению
-                cell.textContent = data.value;
+            if (targetCell) {
+                // Обновляем содержимое ячейки на основе значения cellValue
+                if (cellValue === 1) {
+                    targetCell.classList.add("bg-miss");
+                    console.log("miss");
+                    addBattleLog("Player", row, col, 1);
+                } else if (cellValue === 2) {
+                    targetCell.classList.add("bg-miss");
+                    addBattleLog("Player", row, col, 1);
+                } else if (cellValue === 8) {
+                    targetCell.classList.add("bg-ship-front");
+                    addBattleLog("Player", row, col, 1);
+                } else if (cellValue === 9) {
+                    targetCell.classList.add("bg-hit");
+                    addBattleLog("Player", row, col, 9);
+                } else {
+                    // Если значение не равно 1, 2, 8 или 9, можете сделать другую обработку по вашему усмотрению
+                    targetCell.textContent = cellValue;
+                }
             }
         }
+
         // ход бота
     })
     .catch((error) => {

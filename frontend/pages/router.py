@@ -42,7 +42,7 @@ async def cell_click(cell_data: CellData):
     # 1 - miss
     # 2 - hit
     new_value = value + 1
-    # Верните какой-либо ответ, если это необходимо
+    # Возвращай что-то такое: [[0,3,0,'enemy'][1,4,1,'player'][1,5,0,'player']]
     return {"i": i, "j": j, "value": new_value, 'matrix': matrix}
 
 

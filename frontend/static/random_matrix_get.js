@@ -1,6 +1,6 @@
 // Функция для обработки клика на кнопку 'Random Placement'
 function generateClickHandler(side) {
-    console.log(side)
+    console.log('random generated for ' + side)
     clearMatrix(side);
     // Отправляем запрос на сервер для получения сгенерированной матрицы
     fetch('/game/api/random_matrix', {
