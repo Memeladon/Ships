@@ -9,6 +9,7 @@
 <script src="{{ url_for('static', path='/battle_log.js') }}"></script>
 <script src="{{ url_for('static', path='/restart_game.js') }}"></script>
 <script src="{{ url_for('static', path='/drag&drop.js') }}"></script>
+<script src="{{ url_for('static', path='/simple_placement.js') }}"></script>
 <!--<script src="{{ url_for('static', path='/ship_placement.js') }}"></script>-->
 
 {% endblock %}
@@ -35,20 +36,20 @@
                 <h2>Расставьте корабли</h2>
                 <div id="ships-container" class="ships_container">
                     <li>
-                        <div id="fourdeck1" class="ship fourdeck" draggable="true"></div>
-                        <div id="tripledeck1" class="ship tripledeck tripledeck1" draggable="true"></div>
-                        <div id="tripledeck2" class="ship tripledeck tripledeck2" draggable="true"></div>
+                        <div id="fourdeck1" class="ship" draggable="true" data-length="4"></div>
+                        <div id="tripledeck1" class="ship" draggable="true" data-length="3"></div>
+                        <div id="tripledeck2" class="ship" draggable="true" data-length="3"></div>
                     </li>
                     <li>
-                        <div id="doubledeck1" class="ship doubledeck" draggable="true"></div>
-                        <div id="doubledeck2" class="ship doubledeck doubledeck2" draggable="true"></div>
-                        <div id="doubledeck3" class="ship doubledeck doubledeck3" draggable="true"></div>
+                        <div id="doubledeck1" class="ship" draggable="true" data-length="2"></div>
+                        <div id="doubledeck2" class="ship" draggable="true" data-length="2"></div>
+                        <div id="doubledeck3" class="ship" draggable="true" data-length="2"></div>
                     </li>
                     <li>
-                        <div id="singledeck1" class="ship singledeck" draggable="true"></div>
-                        <div id="singledeck2" class="ship singledeck singledeck2" draggable="true"></div>
-                        <div id="singledeck3" class="ship singledeck singledeck3" draggable="true"></div>
-                        <div id="singledeck4" class="ship singledeck singledeck4" draggable="true"></div>
+                        <div id="singledeck1" class="ship" draggable="true" data-length="1"></div>
+                        <div id="singledeck2" class="ship" draggable="true" data-length="1"></div>
+                        <div id="singledeck3" class="ship" draggable="true" data-length="1"></div>
+                        <div id="singledeck4" class="ship" draggable="true" data-length="1"></div>
                     </li>
                 </div>
             </div>

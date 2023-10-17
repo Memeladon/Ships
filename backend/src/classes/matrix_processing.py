@@ -21,7 +21,7 @@ class MatrixProcessing(object):
             num_rows = len(given_matrix)
             num_columns = len(given_matrix[0])
             self.matrix = given_matrix
-            self.hidden_war_place = np.zeros((num_rows, num_columns),dtype=np.int32)
+            self.hidden_war_place = np.zeros((num_rows, num_columns), dtype=np.int32)
 
     # Нужен для расстановки кораблей "по правилам" (метод random_place)
     @staticmethod

@@ -18,6 +18,11 @@ body {
     background-color: #e6f7ff; /* Светло-голубой цвет в качестве фона */
 }
 
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
 h2 {
     font-family: 'Chalkduster', sans-serif;
     background-color: #e6f7ff; /* Светло-голубой цвет в качестве фона */
@@ -194,19 +199,19 @@ img:hover {
     background-color: navy;
 }
 
-.fourdeck {
+.ship[data-length="4"] {
     width: 128px;
 }
 
-.tripledeck {
+.ship[data-length="3"] {
     width: 96px;
 }
 
-.doubledeck {
+.ship[data-length="2"] {
     width: 64px;
 }
 
-.singledeck {
+.ship[data-length="1"] {
     width: 32px;
 }
 
