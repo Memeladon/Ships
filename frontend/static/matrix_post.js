@@ -1,4 +1,4 @@
-function save_player_matrix()
+function save_player_matrix() {
 // Получите матрицу 'player' из HTML
     const playerMatrix = getMatrixFromHTML('player');
     
