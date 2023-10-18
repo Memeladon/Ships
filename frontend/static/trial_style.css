@@ -215,6 +215,15 @@ img:hover {
     width: 32px;
 }
 
+.ship[shipOrientation="horizontal"] {
+    
+}
+
+.ship[shipOrientation="vertical"] {
+
+}
+
+
 /* Логи */
 
 .log-message {
