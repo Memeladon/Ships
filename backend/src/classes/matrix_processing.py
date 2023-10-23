@@ -102,15 +102,20 @@ class MatrixProcessing(object):
         ans = ""
         if self.matrix[i][j] == 0 or self.hidden_war_place[i][j] == 1:  # попали в воду?
             self.hidden_war_place[i][j] = 1
+            #добавить в список единичку.
             ans = "miss"
         else:
+
             self.hidden_war_place[i][j] = 2
+            #добавить i,j 7
             ans = "hit"
             # осталась ли хоть одна целая часть корабля
             if (not ((i != 9 and (self.matrix[i + 1][j] == 8)) or  # справа
                      (i != 0 and (self.matrix[i - 1][j] == 8)) or  # слева
                      (j != 9 and (self.matrix[i][j + 1] == 8)) or  # вверх
                      (j != 0 and (self.matrix[i][j - 1] == 8)))):  # низ
+                self.hidden_war_place[i][j] =
+                #удалить из списка 1-й элемент
                 if ((i != 9 and (self.hidden_war_place[i + 1][j] == 2)) or
                         (i != 0 and (self.hidden_war_place[i - 1][j] == 2))):  # корабль вертикально стоит?
                     k = i
@@ -128,15 +133,16 @@ class MatrixProcessing(object):
                         k += 1
                         if k == 9 or self.hidden_war_place[k][j] != 2:
                             break
-                    self.hidden_war_place[kk][j] = 1
+                    if (kk!=0):
+                        self.hidden_war_place[kk][j] = 1
                     if k != 10:  # можно ли закрасить после корабля?
-                        self.hidden_war_place[k][j] = 7
+                        self.hidden_war_place[k][j] = 1
                         if j != 9:
                             self.hidden_war_place[k][j + 1] = 1
                         if j != 0:
                             self.hidden_war_place[k][j - 1] = 1
 
-                    
+
                     ans = "break down"
                 else:
                     k = j
@@ -155,14 +161,15 @@ class MatrixProcessing(object):
                         if k == 9 or self.hidden_war_place[i][k] != 2:
 
                             break
-                    self.hidden_war_place[i][kk] = 1
+                    if (kk!=0):
+                        self.hidden_war_place[i][kk] = 1
                     if k != 10:
-                        self.hidden_war_place[i][k] = 7
+                        self.hidden_war_place[i][k] = 1
                         if i != 9:
                             self.hidden_war_place[i + 1][k] = 1
                         if i != 0:
                             self.hidden_war_place[i - 1][k] = 1
-                    
+
                     ans = "break down"
         if self.matrix[i][j] == 8:
             self.matrix[i][j] = 7
@@ -205,4 +212,3 @@ print (bot.matrix)
             # 1: 'miss.png',
             # 8: 'ship.png',
             # 7: 'hit.png'
-
