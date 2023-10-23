@@ -5,7 +5,7 @@ function cellClickHandler(cell) {
     const value = cell.getAttribute('data-value');
 
     // Отправляем координаты на сервер с помощью AJAX (XMLHttpRequest или Fetch API)
-    fetch('/game/api/cell-click', {
+    fetch('/api/cell-click', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -14,8 +14,11 @@ function cellClickHandler(cell) {
     })
     .then((response) => response.json())
     .then((data) => {
-        // Проходим по массиву массивов и обновляем ячейки
-        for (const item of data) {
+            // В data должен быть ключ 'data_cell', который содержит список списков
+        const dataList = data['data_cell'];
+
+        // Проходим по списку списков и обновляем ячейки
+        for (const item of dataList) {
             const row = item[0];
             const col = item[1];
             const cellValue = item[2];

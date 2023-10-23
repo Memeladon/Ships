@@ -12,11 +12,12 @@ amount_types = 4
 battleground_rows = 10
 battleground_columns = 10
 
-bot = MatrixProcessing(None,battleground_rows,battleground_columns)
+bot = MatrixProcessing(None, battleground_rows, battleground_columns)
 
 router = APIRouter(
-    prefix='/game',
-    tags=['Game']
+    # prefix='/game',
+    tags=['Game'],
+    responses={404: {"description": "Not found"}}
 )
 
 templates = Jinja2Templates(directory='frontend/templates')
@@ -34,7 +35,7 @@ async def cell_click(cell_data: CellData):
     i = cell_data.i
     j = cell_data.j
     value = cell_data.value
-    #Дописать условияя, возвращать список списков аттак
+    # Дописать условияя, возвращать список списков аттак
 
     # Здесь вы можете обработать выбранную ячейку по координатам (i, j)
 
@@ -43,13 +44,13 @@ async def cell_click(cell_data: CellData):
     # 1 - miss
     # 2 - hit
     new_value = value + 1
-    # Возвращай что-то такое: [[0,3,0,'enemy'][1,4,1,'player'][1,5,0,'player']]
-    return {"i": i, "j": j, "value": new_value, 'matrix': matrix}
+    result_data = [[i, j, new_value, matrix]]
+    return {'data_cell': result_data}
+
 
 @router.post("/api/initialize_matrix")
 async def random_matrix():
-
-    player = MatrixProcessing(None,battleground_rows,battleground_columns)
+    player = MatrixProcessing(None, battleground_rows, battleground_columns)
     generated_matrix = player.random_place(amount_types)
 
     # Верните какой-либо ответ, если это необходимо
