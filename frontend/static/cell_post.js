@@ -14,45 +14,43 @@ function cellClickHandler(cell) {
     })
     .then((response) => response.json())
     .then((data) => {
-            // В data должен быть ключ 'data_cell', который содержит список списков
-        const dataListB = data['data_bot']; // Куда стрелял Игрок
-        const dataListP = data['data_player']; // Куда стрелял Бот
-        const check_eof = data['check_eof'];
+        const dataBot = data['data_bot'];
+        const dataPlayer = data['data_player'];
+        const checkEof = data['check_eof'];
 
-        if (dataListP != []) {
-            for (const item of dataListP) {
-                const row = item[0];
-                const col = item[1];
-                const cellValue = item[2];
-                const targetMatrix = 'player';
+        // Проходим по списку списков и обновляем ячейки для бота
+        for (const item of dataBot) {
+            const row = item[0];
+            const col = item[1];
+            const cellValue = item[2];
+            const targetMatrix = 'enemy';
 
-                // Получаем ссылку на ячейку
-                const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
+            // Получаем ссылку на ячейку
+            const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
+            console.log(targetCell)
 
-                if (targetCell) {
-                    // Обновляем содержимое ячейки на основе значения cellValue
-                    if (cellValue === 1) {
-                        targetCell.classList.add("bg-miss");
-                        console.log("miss");
-                        addBattleLog("Player", row, col, 1);
-                    } else if (cellValue === 7) {
-                        targetCell.classList.add("bg-hit");
-                        console.log("hit");
-                        addBattleLog("Player", row, col, 7);
-                    } else {
-                        // Если значение не равно 1, 2, 8 или 9, можете сделать другую обработку по вашему усмотрению
-                        targetCell.textContent = cellValue;
-                    }
+            if (targetCell) {
+                // Обновляем содержимое ячейки на основе значения cellValue
+                if (cellValue === 1) {
+                    targetCell.classList.add("bg-miss");
+                    console.log("miss");
+                    addBattleLog("Player", row, col, 1);
+                } else if (cellValue === 7) {
+                    targetCell.classList.add("bg-hit");
+                    console.log("hit");
+                    addBattleLog("Player", row, col, 7);
+                } else {
+                    targetCell.textContent = cellValue;
                 }
             }
         }
 
-        // Проходим по списку списков и обновляем ячейки
-        for (const item of dataListB) {
+        // Проходим по списку списков и обновляем ячейки для игрока
+        for (const item of dataPlayer) {
             const row = item[0];
             const col = item[1];
             const cellValue = item[2];
-            const targetMatrix = 'bot';
+            const targetMatrix = 'player';
 
             // Получаем ссылку на ячейку
             const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
@@ -68,21 +66,19 @@ function cellClickHandler(cell) {
                     console.log("hit");
                     addBattleLog("Player", row, col, 7);
                 } else {
-                    // Если значение не равно 1, 2, 8 или 9, можете сделать другую обработку по вашему усмотрению
                     targetCell.textContent = cellValue;
                 }
             }
         }
 
-        if (check_eof == 'bot') {
-        // обработка проигрыша бота
+        // Обработка условия конца игры
+        if (checkEof === 'bot') {
+            // обработка проигрыша бота
+            // ...
+        } else if (checkEof === 'player') {
+            // обработка проигрыша игрока
+            // ...
         }
-        else if (check_eof == 'player'){
-        // обработка проигрыша Игрока
-        }
-        // иначе False  ничего не происходит
-
-
     })
     .catch((error) => {
         console.error('Ошибка при отправке данных на сервер:', error);
