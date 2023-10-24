@@ -14,6 +14,7 @@ battleground_rows = 10
 battleground_columns = 10
 
 bot = MatrixProcessing(None, battleground_rows, battleground_columns)
+player = MatrixProcessing(None, battleground_rows, battleground_columns)
 
 router = APIRouter(
     # prefix='/game',
@@ -46,19 +47,29 @@ async def cell_click(cell_data: CellData):
     # Промах
     # ходы бота
     bot_coords, ans = bot.attack(i, j)
+
     final_bot_coords = []
     final_bot_coords += bot_coords
     final_player_coords = []
     check_end_of_game_for_bot = bot.end_of_game()
+
     if check_end_of_game_for_bot:
+
         return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'bot'}
     if ans == "miss":
+        ans = ""
         while ans != "miss":
+
             col, row = pl_connect(player.hidden_war_place)
+
             player_coords, ans = player.attack(col, row)
+
             final_player_coords += player_coords
+
             check_end_of_game_for_player = player.end_of_game()
+
             if check_end_of_game_for_player:
+
                 return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'player'}
 
     return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': False}
@@ -66,6 +77,8 @@ async def cell_click(cell_data: CellData):
 
 @router.post("/api/initialize_matrix")
 async def random_matrix():
+    global player
+    global bot
     player = MatrixProcessing(None, battleground_rows, battleground_columns)
     generated_matrix = player.random_place(amount_types)
 
@@ -79,10 +92,23 @@ async def random_matrix():
 @router.post("/api/save_matrix")
 async def save_matrix(matrix_item: MatrixItem):
     player_matrix = matrix_item.matrix
+    global player
     player = MatrixProcessing(player_matrix)
+
 
     # Здесь вы можете выполнить необходимую обработку матрицы
     # Например, вы можете сохранить ее в базе данных или выполнять другие операции
 
     # Вернем успешный статус, чтобы клиент знал, что матрица была обновлена
     return {"message": f"Матрица '{player_matrix}' сохранена"}
+
+[[8, 0, 0, 8, 8, 0, 0, 0, 0, 0], 
+[8, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 8, 1, 8, 0], 
+[0, 8, 8, 8, 1, 0, 0, 1, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 1, 0, 0, 8, 0, 0], 
+[0, 0, 8, 8, 8, 0, 0, 7, 1, 0], 
+[0, 0, 0, 0, 0, 0, 0, 7, 0, 0], 
+[8, 0, 0, 8, 0, 0, 0, 7, 0, 0], 
+[0, 0, 0, 8, 0, 8, 0, 0, 0, 0]]
