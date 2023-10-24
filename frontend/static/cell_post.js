@@ -89,6 +89,21 @@ function cellClickHandler(cell) {
             // ...
         }
 
+        // лог для ходов бота
+        if (configListBot.length > 0) {
+            for (const item of configListBot){
+                if (item == 'miss'){}
+                if (item == 'hit'){}
+                if (item == 'break_down'){}
+            }
+        }
+
+        // лог для ходов игрока
+        for (const item of configListPlayer){
+            if i(tem == 'miss'){}
+            if (item == 'hit'){}
+            if (item == 'break_down'){}
+        }
 
     })
     .catch((error) => {
