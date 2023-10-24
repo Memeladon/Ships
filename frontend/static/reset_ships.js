@@ -1,8 +1,10 @@
-function resetShips() {
-    const player_cells = document.querySelectorAll('.player-board .cell');
-    for (let i = 0; i < player_cells.length; i++) {
-        player_cells[i].classList.remove('ship-cell');
-        player_cells[i].setAttribute('data-value', '0');
+function resetShips(clearBoard = true) {
+    if(clearBoard) {
+        const player_cells = document.querySelectorAll('.player-board .cell');
+        for (let i = 0; i < player_cells.length; i++) {
+            player_cells[i].classList.remove('ship-cell');
+            player_cells[i].setAttribute('data-value', '0');
+        }
     }
 
     const shipGroups = {

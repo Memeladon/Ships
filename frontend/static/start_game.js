@@ -29,7 +29,7 @@ function start_game() {
         addPlacementLog('Сначала расставьте корабли.');
     } else {
         // Генерация рандомной матрицы для бота
-        generateClickHandler('enemy');
+        generateClickHandler('enemy', false);
 
         menuBoard.style.display = 'none';
         logBoard.style.display = 'block';
