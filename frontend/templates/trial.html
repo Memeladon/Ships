@@ -2,6 +2,8 @@
 
 {% block head %}
 <link href="{{ url_for('static', path='/trial_style.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', path='/footer.css') }}" rel="stylesheet">
+
 <script src="{{ url_for('static', path='/cell_post.js') }}"></script>
 <script src="{{ url_for('static', path='/random_matrix_get.js') }}"></script>
 <script src="{{ url_for('static', path='/matrix_post.js') }}"></script>
@@ -105,7 +107,8 @@
         </section>
     </body>
 </main>
-<footer>
-    <!-- Здесь ваш контент для подвала -->
-</footer>
+{% endblock %}
+
+{% block footer %}
+
 {% endblock %}

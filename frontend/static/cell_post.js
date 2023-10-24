@@ -5,7 +5,7 @@ function cellClickHandler(cell) {
     const value = cell.getAttribute('data-value');
 
     // Отправляем координаты на сервер с помощью AJAX (XMLHttpRequest или Fetch API)
-    fetch('/game/api/cell-click', {
+    fetch('/api/cell-click', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -14,12 +14,43 @@ function cellClickHandler(cell) {
     })
     .then((response) => response.json())
     .then((data) => {
-        // Проходим по массиву массивов и обновляем ячейки
-        for (const item of data) {
+        const dataBot = data['data_bot'];
+        const dataPlayer = data['data_player'];
+        const checkEof = data['check_eof'];
+
+        // Проходим по списку списков и обновляем ячейки для бота
+        for (const item of dataBot) {
             const row = item[0];
             const col = item[1];
             const cellValue = item[2];
-            const targetMatrix = item[3];
+            const targetMatrix = 'enemy';
+
+            // Получаем ссылку на ячейку
+            const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
+            console.log(targetCell)
+
+            if (targetCell) {
+                // Обновляем содержимое ячейки на основе значения cellValue
+                if (cellValue === 1) {
+                    targetCell.classList.add("bg-miss");
+                    console.log("miss");
+                    addBattleLog("Player", row, col, 1);
+                } else if (cellValue === 7) {
+                    targetCell.classList.add("bg-hit");
+                    console.log("hit");
+                    addBattleLog("Player", row, col, 7);
+                } else {
+                    targetCell.textContent = cellValue;
+                }
+            }
+        }
+
+        // Проходим по списку списков и обновляем ячейки для игрока
+        for (const item of dataPlayer) {
+            const row = item[0];
+            const col = item[1];
+            const cellValue = item[2];
+            const targetMatrix = 'player';
 
             // Получаем ссылку на ячейку
             const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
@@ -30,23 +61,24 @@ function cellClickHandler(cell) {
                     targetCell.classList.add("bg-miss");
                     console.log("miss");
                     addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 2) {
-                    targetCell.classList.add("bg-miss");
-                    addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 8) {
-                    targetCell.classList.add("bg-ship-front");
-                    addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 9) {
+                } else if (cellValue === 7) {
                     targetCell.classList.add("bg-hit");
-                    addBattleLog("Player", row, col, 9);
+                    console.log("hit");
+                    addBattleLog("Player", row, col, 7);
                 } else {
-                    // Если значение не равно 1, 2, 8 или 9, можете сделать другую обработку по вашему усмотрению
                     targetCell.textContent = cellValue;
                 }
             }
         }
 
-        // ход бота
+        // Обработка условия конца игры
+        if (checkEof === 'bot') {
+            // обработка проигрыша бота
+            // ...
+        } else if (checkEof === 'player') {
+            // обработка проигрыша игрока
+            // ...
+        }
     })
     .catch((error) => {
         console.error('Ошибка при отправке данных на сервер:', error);

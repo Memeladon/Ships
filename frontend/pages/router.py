@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 
 from backend.entity import (CellData, MatrixItem)
 from backend.src.classes.matrix_processing import MatrixProcessing
+from backend.src.pl_connect import pl_connect
 
 # from pyswip import Prolog
 
@@ -12,11 +13,12 @@ amount_types = 4
 battleground_rows = 10
 battleground_columns = 10
 
-bot = MatrixProcessing(None,battleground_rows,battleground_columns)
+bot = MatrixProcessing(None, battleground_rows, battleground_columns)
 
 router = APIRouter(
-    prefix='/game',
-    tags=['Game']
+    # prefix='/game',
+    tags=['Game'],
+    responses={404: {"description": "Not found"}}
 )
 
 templates = Jinja2Templates(directory='frontend/templates')
@@ -27,6 +29,11 @@ def get_main_page(request: Request):
     return templates.TemplateResponse("trial.html", {'request': request})
 
 
+# 7 - подбит
+# 1 - промах
+# 8 - Корабль
+# 0 - ничего
+
 # Обработчик POST-запроса для обработки выбранной ячейки
 @router.post("/api/cell-click")
 async def cell_click(cell_data: CellData):
@@ -34,21 +41,32 @@ async def cell_click(cell_data: CellData):
     i = cell_data.i
     j = cell_data.j
     value = cell_data.value
+    # Попал
+    # вернул знач
+    # Промах
+    # ходы бота
+    bot_coords, ans = bot.attack(i, j)
+    final_bot_coords = []
+    final_bot_coords += bot_coords
+    final_player_coords = []
+    check_end_of_game_for_bot = bot.end_of_game()
+    if check_end_of_game_for_bot:
+        return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'bot'}
+    if ans == "miss":
+        while ans != "miss":
+            col, row = pl_connect(player.hidden_war_place)
+            player_coords, ans = player.attack(col, row)
+            final_player_coords += player_coords
+            check_end_of_game_for_player = player.end_of_game()
+            if check_end_of_game_for_player:
+                return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'player'}
 
-    # Здесь вы можете обработать выбранную ячейку по координатам (i, j)
+    return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': False}
 
-    print(f"Выбрана ячейка с координатами ({i}, {j}), и значением {value}, в матрице \'{matrix}\'")
-
-    # 1 - miss
-    # 2 - hit
-    new_value = value + 1
-    # Возвращай что-то такое: [[0,3,0,'enemy'][1,4,1,'player'][1,5,0,'player']]
-    return {"i": i, "j": j, "value": new_value, 'matrix': matrix}
 
 @router.post("/api/initialize_matrix")
 async def random_matrix():
-
-    player = MatrixProcessing(None,battleground_rows,battleground_columns)
+    player = MatrixProcessing(None, battleground_rows, battleground_columns)
     generated_matrix = player.random_place(amount_types)
 
     # Верните какой-либо ответ, если это необходимо
@@ -61,6 +79,7 @@ async def random_matrix():
 @router.post("/api/save_matrix")
 async def save_matrix(matrix_item: MatrixItem):
     player_matrix = matrix_item.matrix
+    player = MatrixProcessing(player_matrix)
 
     # Здесь вы можете выполнить необходимую обработку матрицы
     # Например, вы можете сохранить ее в базе данных или выполнять другие операции
