@@ -100,13 +100,16 @@ class MatrixProcessing(object):
 
     def attack(self, i, j):
         ans = ""
+        changed_coords = []
         if self.matrix[i][j] == 0 or self.hidden_war_place[i][j] == 1:  # попали в воду?
             self.hidden_war_place[i][j] = 1
+            changed_coords.append([i,j,1])
             #добавить в список единичку.
             ans = "miss"
         else:
 
             self.hidden_war_place[i][j] = 2
+            changed_coords.append([i,j,7])
             #добавить i,j 7
             ans = "hit"
             # осталась ли хоть одна целая часть корабля
@@ -114,67 +117,104 @@ class MatrixProcessing(object):
                      (i != 0 and (self.matrix[i - 1][j] == 8)) or  # слева
                      (j != 9 and (self.matrix[i][j + 1] == 8)) or  # вверх
                      (j != 0 and (self.matrix[i][j - 1] == 8)))):  # низ
-                self.hidden_war_place[i][j] =
                 #удалить из списка 1-й элемент
+                changed_coords.pop(0)
                 if ((i != 9 and (self.hidden_war_place[i + 1][j] == 2)) or
                         (i != 0 and (self.hidden_war_place[i - 1][j] == 2))):  # корабль вертикально стоит?
                     k = i
+                    kk = -1
                     while (k != 0) and (self.hidden_war_place[k - 1][j] == 2):  # бежим вверх
                         k -= 1
                     if k != 0:
                         k -= 1  # зашли за корабль
-                    kk = k
+                        kk = k
                     while True:  # бежим по кораблю обратно и закрашиваем 3 строки
-                        self.hidden_war_place[k][j] = 7
+                        self.hidden_war_place[k][j] = 7##
+                        changed_coords.append([k,j,7])
+
                         if j != 9:
-                            self.hidden_war_place[k][j + 1] = 1
+                            self.hidden_war_place[k][j + 1] = 1##
+                            changed_coords.append([k,j+1,1])
                         if j != 0:
-                            self.hidden_war_place[k][j - 1] = 1
+                            self.hidden_war_place[k][j - 1] = 1##
+                            changed_coords.append([k,j-1,1])
                         k += 1
                         if k == 9 or self.hidden_war_place[k][j] != 2:
                             break
-                    if (kk!=0):
+                    if (kk!=-1):
                         self.hidden_war_place[kk][j] = 1
+                        target = [kk, j, 7]
+
+                        # Найдем индекс целевого списка в основном списке
+                        index = changed_coords.index(target)
+
+                        # Заменим 7 на 1
+                        changed_coords[index][2] = 1
+
+                        #найти kk j == 7 заменить на 1 
                     if k != 10:  # можно ли закрасить после корабля?
-                        self.hidden_war_place[k][j] = 1
+                        self.hidden_war_place[k][j] = 1##
+                        changed_coords.append([k,j,1])
                         if j != 9:
-                            self.hidden_war_place[k][j + 1] = 1
+                            self.hidden_war_place[k][j + 1] = 1##
+                            changed_coords.append([k,j+1,1])
                         if j != 0:
-                            self.hidden_war_place[k][j - 1] = 1
+                            self.hidden_war_place[k][j - 1] = 1##
+                            changed_coords.append([k,j-1,1])
+
 
 
                     ans = "break down"
                 else:
+                    kk = -1
                     k = j
                     while (k != 0) and (self.hidden_war_place[i][k - 1] == 2):  # бежим влево и ищем КОНЕЦ
                         k -= 1
                     if k != 0:
                         k -= 1  # зашли за корабль
-                    kk = k
+                        kk = k
+
                     while True:  # бежим вправо до КОНЦА
-                        self.hidden_war_place[i][k] = 7
+                        self.hidden_war_place[i][k] = 7##
+                        changed_coords.append([i,k,7])
                         if i != 9:
-                            self.hidden_war_place[i + 1][k] = 1
+                            self.hidden_war_place[i + 1][k] = 1##
+                            changed_coords.append([i+1,k,1])
                         if i != 0:
-                            self.hidden_war_place[i - 1][k] = 1
+                            self.hidden_war_place[i - 1][k] = 1##
+                            changed_coords.append([i-1,k,1])
                         k += 1
                         if k == 9 or self.hidden_war_place[i][k] != 2:
 
                             break
-                    if (kk!=0):
+                    if (kk!=-1):
                         self.hidden_war_place[i][kk] = 1
+
+                        target = [i, kk, 7]
+
+                        # Найдем индекс целевого списка в основном списке
+                        index = changed_coords.index(target)
+                        
+                        # Заменим 7 на 1
+                        changed_coords[index][2] = 1
+
+                         #найти kk j == 7 заменить на 1  
                     if k != 10:
-                        self.hidden_war_place[i][k] = 1
+                        self.hidden_war_place[i][k] = 1##
+                        changed_coords.append([i,k,1])
                         if i != 9:
-                            self.hidden_war_place[i + 1][k] = 1
+                            self.hidden_war_place[i + 1][k] = 1##
+                            changed_coords.append([i + 1,k,1])
                         if i != 0:
-                            self.hidden_war_place[i - 1][k] = 1
+                            self.hidden_war_place[i - 1][k] = 1##
+                            changed_coords.append([i - 1,k,1])
 
                     ans = "break down"
         if self.matrix[i][j] == 8:
             self.matrix[i][j] = 7
         else:
             self.matrix[i][j] = 1
+        return changed_coords
 
 
     def get_hidden_war_place(self):
@@ -201,14 +241,21 @@ matrix = np.array([
 bot = MatrixProcessing(matrix)
 
 
-for i in range (7):
-    for j in range (7):
-        bot.attack(i,j)
+# for i in range (7):
+#     for j in range (7):
+#         print (bot.attack(i,j))
+#         print (bot.hidden_war_place)
+#         print (bot.matrix)
+
+print (bot.attack(1,3))
+print (bot.attack(2,3))
+print (bot.attack(3,3))
+print (bot.attack(4,3))
 
 print (bot.hidden_war_place)
 print (bot.matrix)
-
             # 0: 'empty.png',
             # 1: 'miss.png',
             # 8: 'ship.png',
             # 7: 'hit.png'
+
