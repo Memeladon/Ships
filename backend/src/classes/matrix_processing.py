@@ -91,17 +91,56 @@ class MatrixProcessing(object):
     # False - игра не закончена(есть кораблики)
     # True - конец игры (все корабли разбиты)
     def end_of_game(self):
-        result = np.any(self.matrix.copy() == 8)
-        if result:
-            result = False
+        # Плоский список всех элементов
+        flat_list = [item for sublist in self.matrix for item in sublist]
+        result = np.any(np.array(flat_list) == 8)
+        return not result
+
+
+    def have_ship_got_any_cell(self, i, j):
+        vertically = False
+        # Корабль стоит вертикально?
+        print(i,j)
+        if ((i != 9 and (self.matrix[i + 1][j] == 7 or self.matrix[i + 1][j] == 8)) or
+            (i != 0 and (self.matrix[i - 1][j] == 7 or self.matrix[i - 1][j] == 8))):
+            vertically = True
+
         else:
-            result = True
-        return result
+          vertically = False
+        print(vertically)
+        print(vertically)
+        if vertically == True:
+           for k in range(i+1, 10):
+             if self.matrix[k][j] == 8:
+               return True
+             if self.matrix[k][j] != 7:
+               break
+           for k in range(i-1,-1,-1):
+             if self.matrix[k][j] == 8:
+               return True
+             if self.matrix[k][j] != 7:
+               break
+        else:
+          for k in range(j+1, 10):
+            if self.matrix[i][k] == 8:
+              return True
+            if self.matrix[i][k] != 7:
+              break
+          for k in range(j-1, -1, -1):
+            if self.matrix[i][k] == 8:
+              return True
+            if self.matrix[i][k] != 7:
+              break
+        return False
 
     def attack(self, i, j):
+        print("<<<<<<<<<<<<")
+        print(i,j)
+        print(">>>>>>>>>>>")
+
         ans = ""
         changed_coords = []
-        if self.matrix[i][j] == 0 or self.hidden_war_place[i][j] == 1:  # попали в воду?
+        if self.matrix[i][j] == 0:  # попали в воду?
             self.hidden_war_place[i][j] = 1
             changed_coords.append([i,j,1])
             #добавить в список единичку.
@@ -113,10 +152,10 @@ class MatrixProcessing(object):
             #добавить i,j 7
             ans = "hit"
             # осталась ли хоть одна целая часть корабля
-            if (not ((i != 9 and (self.matrix[i + 1][j] == 8)) or  # справа
-                     (i != 0 and (self.matrix[i - 1][j] == 8)) or  # слева
-                     (j != 9 and (self.matrix[i][j + 1] == 8)) or  # вверх
-                     (j != 0 and (self.matrix[i][j - 1] == 8)))):  # низ
+            print("CHECK")
+            print(self.have_ship_got_any_cell(i, j))
+            print(i,j)
+            if (not self.have_ship_got_any_cell(i, j)):  # низ
                 #удалить из списка 1-й элемент
                 changed_coords.pop(0)
                 if ((i != 9 and (self.hidden_war_place[i + 1][j] == 2)) or
@@ -139,7 +178,7 @@ class MatrixProcessing(object):
                             self.hidden_war_place[k][j - 1] = 1##
                             changed_coords.append([k,j-1,1])
                         k += 1
-                        if k == 9 or self.hidden_war_place[k][j] != 2:
+                        if k == 10 or self.hidden_war_place[k][j] != 2:
                             break
                     if (kk!=-1):
                         self.hidden_war_place[kk][j] = 1
@@ -184,7 +223,7 @@ class MatrixProcessing(object):
                             self.hidden_war_place[i - 1][k] = 1##
                             changed_coords.append([i-1,k,1])
                         k += 1
-                        if k == 9 or self.hidden_war_place[i][k] != 2:
+                        if k == 10 or self.hidden_war_place[i][k] != 2:
 
                             break
                     if (kk!=-1):
@@ -214,6 +253,10 @@ class MatrixProcessing(object):
             self.matrix[i][j] = 7
         else:
             self.matrix[i][j] = 1
+        print("XXXXXXXXx")
+        print(self.matrix)
+        print("HHHHHHH")
+        print(self.hidden_war_place)
         return changed_coords,ans
 
 
