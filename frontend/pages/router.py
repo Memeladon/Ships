@@ -46,7 +46,10 @@ async def cell_click(cell_data: CellData):
     # вернул знач
     # Промах
     # ходы бота
+    answer_list_player = []
+    answer_list_bot = []
     bot_coords, ans = bot.attack(i, j)
+    answer_list_player.append(ans)
 
     final_bot_coords = []
     final_bot_coords += bot_coords
@@ -54,8 +57,7 @@ async def cell_click(cell_data: CellData):
     check_end_of_game_for_bot = bot.end_of_game()
 
     if check_end_of_game_for_bot:
-
-        return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'bot'}
+        return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'bot','answer_list_player': answer_list_player,'answer_list_bot': answer_list_bot}
     if ans == "miss":
         ans = ""
         while ans != "miss":
@@ -63,16 +65,15 @@ async def cell_click(cell_data: CellData):
             col, row = pl_connect(player.hidden_war_place)
 
             player_coords, ans = player.attack(col, row)
+            answer_list_bot.append(ans)
 
             final_player_coords += player_coords
 
             check_end_of_game_for_player = player.end_of_game()
 
             if check_end_of_game_for_player:
-
-                return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'player'}
-
-    return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': False}
+                return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'player','answer_list_player': answer_list_player,'answer_list_bot': answer_list_bot}
+    return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': False,'answer_list_player': answer_list_player,'answer_list_bot': answer_list_bot}
 
 
 @router.post("/api/initialize_matrix")
