@@ -33,15 +33,10 @@ function cellClickHandler(cell) {
                     targetCell.classList.add("bg-miss");
                     console.log("miss");
                     addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 2) {
-                    targetCell.classList.add("bg-miss");
-                    addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 8) {
-                    targetCell.classList.add("bg-ship-front");
-                    addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 9) {
+                } else if (cellValue === 7) {
                     targetCell.classList.add("bg-hit");
-                    addBattleLog("Player", row, col, 9);
+                    console.log("hit");
+                    addBattleLog("Player", row, col, 7);
                 } else {
                     // Если значение не равно 1, 2, 8 или 9, можете сделать другую обработку по вашему усмотрению
                     targetCell.textContent = cellValue;
