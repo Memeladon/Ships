@@ -35,28 +35,28 @@ function start_game() {
         logBoard.style.display = 'block';
 
         // Отправка матрицы на сервер
-        // save_player_matrix().then(() => {
-        //     // Обработка успешной отправки
-        //     addPlacementLog('Начало игры.');
-        //     randomPlacementButton.classList.add('disabled');
-        //     startGameButton.classList.add('disabled');
-        //
-        //     const player_cells = document.querySelectorAll('.player-board .cell');
-        //     for (let i = 0; i < player_cells.length; i++) {
-        //         player_cells[i].removeAttribute('onclick');
-        //     }
-        //
-        //     const enemy_cells = document.querySelectorAll('.enemy-board .cell');
-        //     for (let i = 0; i < enemy_cells.length; i++) {
-        //         enemy_cells[i].setAttribute('onclick', 'cellClickHandler(this)');
-        //     }
-        //
-        //     menuBoard.setAttribute('hidden', true);
-        //     logBoard.removeAttribute('hidden');
-        //
-        //
-        // }).catch(error => {
-        //     console.error('Ошибка при отправке матрицы:', error);
-        // });
+        save_player_matrix().then(() => {
+            // Обработка успешной отправки
+            addPlacementLog('Начало игры.');
+            randomPlacementButton.classList.add('disabled');
+            startGameButton.classList.add('disabled');
+
+            const player_cells = document.querySelectorAll('.player-board .cell');
+            for (let i = 0; i < player_cells.length; i++) {
+                player_cells[i].removeAttribute('onclick');
+            }
+
+            const enemy_cells = document.querySelectorAll('.enemy-board .cell');
+            for (let i = 0; i < enemy_cells.length; i++) {
+                enemy_cells[i].setAttribute('onclick', 'cellClickHandler(this)');
+            }
+
+            menuBoard.setAttribute('hidden', true);
+            logBoard.removeAttribute('hidden');
+
+
+        }).catch(error => {
+            console.error('Ошибка при отправке матрицы:', error);
+        });
     }
 }

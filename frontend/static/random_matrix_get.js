@@ -1,5 +1,17 @@
 // Функция для обработки клика на кнопку 'Random Placement'
 function generateClickHandler(side) {
+
+    // Согласование рандомной и ручной расстановки
+    function clearShipsFromPool() {
+        const shipsContainer = document.getElementById('ships-container');
+        while (shipsContainer.firstChild) {
+            shipsContainer.firstChild.remove();
+        }
+    }
+    resetShips();
+    clearShipsFromPool();
+
+
     console.log('random generated for ' + side)
     clearMatrix(side);
     // Отправляем запрос на сервер для получения сгенерированной матрицы
