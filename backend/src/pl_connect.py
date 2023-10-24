@@ -24,11 +24,11 @@ def pl_connect(matrix_for_attack):
     return i,j
 
 
-nested_list = [
-[0, 2, 0],
-[0, 0, 0],
-[0, 0, 0]
-]
-i,j = pl_connect(nested_list)
-print(i,j)
+# nested_list = [
+# [0, 2, 0],
+# [0, 0, 0],
+# [0, 0, 0]
+# ]
+# i,j = pl_connect(nested_list)
+# print(i,j)
 
