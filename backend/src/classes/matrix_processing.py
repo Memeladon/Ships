@@ -214,48 +214,48 @@ class MatrixProcessing(object):
             self.matrix[i][j] = 7
         else:
             self.matrix[i][j] = 1
-        return changed_coords
+        return changed_coords,ans
 
 
     def get_hidden_war_place(self):
         return self.hidden_war_place.tolist()
 
 
-amount_types = 4
-battleground_rows = 10
-battleground_columns = 10
+# amount_types = 4
+# battleground_rows = 10
+# battleground_columns = 10
 
-matrix = np.array([
-    [0, 0, 0, 0, 0, 8, 0, 0, 0, 0],
-    [0, 8, 0, 8, 0, 0, 0, 0, 0, 8],
-    [0, 0, 0, 8, 0, 8, 0, 0, 0, 8],
-    [0, 0, 0, 8, 0, 8, 0, 0, 0, 8],
-    [0, 0, 0, 8, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 8, 0, 0, 0],
-    [8, 8, 0, 8, 0, 0, 0, 0, 0, 8],
-    [0, 0, 0, 0, 0, 8, 8, 8, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 8, 8, 0, 0, 0, 0, 0, 0]
-], dtype=np.int32)
+# matrix = np.array([
+#     [0, 0, 0, 0, 0, 8, 0, 0, 0, 0],
+#     [0, 8, 0, 8, 0, 0, 0, 0, 0, 8],
+#     [0, 0, 0, 8, 0, 8, 0, 0, 0, 8],
+#     [0, 0, 0, 8, 0, 8, 0, 0, 0, 8],
+#     [0, 0, 0, 8, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 8, 0, 0, 0],
+#     [8, 8, 0, 8, 0, 0, 0, 0, 0, 8],
+#     [0, 0, 0, 0, 0, 8, 8, 8, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 8, 8, 0, 0, 0, 0, 0, 0]
+# ], dtype=np.int32)
 
-bot = MatrixProcessing(matrix)
+# bot = MatrixProcessing(matrix)
 
 
-# for i in range (7):
-#     for j in range (7):
-#         print (bot.attack(i,j))
-#         print (bot.hidden_war_place)
-#         print (bot.matrix)
+# # for i in range (7):
+# #     for j in range (7):
+# #         print (bot.attack(i,j))
+# #         print (bot.hidden_war_place)
+# #         print (bot.matrix)
 
-print (bot.attack(1,3))
-print (bot.attack(2,3))
-print (bot.attack(3,3))
-print (bot.attack(4,3))
+# print (bot.attack(1,3))
+# print (bot.attack(2,3))
+# print (bot.attack(3,3))
+# print (bot.attack(4,3))
 
-print (bot.hidden_war_place)
-print (bot.matrix)
-            # 0: 'empty.png',
-            # 1: 'miss.png',
-            # 8: 'ship.png',
-            # 7: 'hit.png'
+# print (bot.hidden_war_place)
+# print (bot.matrix)
+#             # 0: 'empty.png',
+#             # 1: 'miss.png',
+#             # 8: 'ship.png',
+#             # 7: 'hit.png'
 
