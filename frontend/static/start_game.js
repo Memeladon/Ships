@@ -22,6 +22,8 @@ function start_game() {
     const logElement = document.querySelector('.log-board .log-message');
     const randomPlacementButton = document.getElementById('randomPlacementButton');
     const startGameButton = document.getElementById('startGameButton');
+    const menuBoard = document.querySelector('.menu-board');
+    const logBoard = document.querySelector('.log-board');
 
     if (!player) {
         addPlacementLog('Сначала расставьте корабли.');
@@ -29,24 +31,32 @@ function start_game() {
         // Генерация рандомной матрицы для бота
         generateClickHandler('enemy');
 
+        menuBoard.style.display = 'none';
+        logBoard.style.display = 'block';
+
         // Отправка матрицы на сервер
-        save_player_matrix().then(() => {
-            // Обработка успешной отправки
-            addPlacementLog('Начало игры.');
-            randomPlacementButton.classList.add('disabled');
-            startGameButton.classList.add('disabled');
-
-            const player_cells = document.querySelectorAll('.player-board .cell');
-            for (let i = 0; i < player_cells.length; i++) {
-                player_cells[i].removeAttribute('onclick');
-            }
-
-            const enemy_cells = document.querySelectorAll('.enemy-board .cell');
-            for (let i = 0; i < enemy_cells.length; i++) {
-                enemy_cells[i].setAttribute('onclick', 'cellClickHandler(this)');
-            }
-        }).catch(error => {
-            console.error('Ошибка при отправке матрицы:', error);
-        });
+        // save_player_matrix().then(() => {
+        //     // Обработка успешной отправки
+        //     addPlacementLog('Начало игры.');
+        //     randomPlacementButton.classList.add('disabled');
+        //     startGameButton.classList.add('disabled');
+        //
+        //     const player_cells = document.querySelectorAll('.player-board .cell');
+        //     for (let i = 0; i < player_cells.length; i++) {
+        //         player_cells[i].removeAttribute('onclick');
+        //     }
+        //
+        //     const enemy_cells = document.querySelectorAll('.enemy-board .cell');
+        //     for (let i = 0; i < enemy_cells.length; i++) {
+        //         enemy_cells[i].setAttribute('onclick', 'cellClickHandler(this)');
+        //     }
+        //
+        //     menuBoard.setAttribute('hidden', true);
+        //     logBoard.removeAttribute('hidden');
+        //
+        //
+        // }).catch(error => {
+        //     console.error('Ошибка при отправке матрицы:', error);
+        // });
     }
 }

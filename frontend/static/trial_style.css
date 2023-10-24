@@ -188,41 +188,93 @@ img:hover {
 
 .ship-cell {
     background-color: navy;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
-/* Drag&Drop = D&D */
+/* -- Drag&Drop = D&D --------------------------------------------------------------------------------------------- */
+.menu-board {
+    display: flex;
+    flex-direction: column;  /* вертикальное направление */
+    justify-content: space-between; /* равномерное распределение элементов */
+    padding: 20px; /* отступы, как у h2 */
+}
+
+.menu-board h2 {
+    flex-shrink: 0; /* чтобы заголовок не сжимался */
+}
+
+.ships_container {
+    flex-grow: 1; /* позволяет ships_container расти и занимать доступное пространство */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f2f7fa; /* Светлый синий цвет фона */
+    border-radius: 15px; /* Закругленные углы для контейнера */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    border: 2px solid #cfd8dc; /* Серая рамка вокруг контейнера */
+}
 
 .ship {
+    flex: 1;
     height: 32px;
-    margin-bottom: 10px;
+    margin: 15px;
     background-color: navy;
+    transition: width 0.3s, height 0.3s;
 }
 
-.ship[data-length="4"] {
+.ship:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Для горизонтальной ориентации */
+.ship[data-length="4"][data-ship-orientation="horizontal"] {
     width: 128px;
 }
 
-.ship[data-length="3"] {
+.ship[data-length="3"][data-ship-orientation="horizontal"] {
     width: 96px;
 }
 
-.ship[data-length="2"] {
+.ship[data-length="2"][data-ship-orientation="horizontal"] {
     width: 64px;
 }
 
-.ship[data-length="1"] {
+.ship[data-length="1"][data-ship-orientation="horizontal"] {
     width: 32px;
 }
 
-.ship[shipOrientation="horizontal"] {
-    
+/* Для вертикальной ориентации */
+.ship[data-length="4"][data-ship-orientation="vertical"] {
+    width: 32px;
+    height: 128px;
 }
 
-.ship[shipOrientation="vertical"] {
-
+.ship[data-length="3"][data-ship-orientation="vertical"] {
+    width: 32px;
+    height: 96px;
 }
 
+.ship[data-length="2"][data-ship-orientation="vertical"] {
+    width: 32px;
+    height: 64px;
+}
+
+.ship[data-length="1"][data-ship-orientation="vertical"] {
+    width: 32px;
+    height: 32px;
+}
+
+
+.dotted-placeholder {
+    border: 2px dashed #000;
+}
+
+.cell.ship-placed {
+    background-color: navy;
+}
 
 /* Логи */
 
@@ -236,4 +288,13 @@ img:hover {
 
 .log-message::-webkit-scrollbar {
     width: 0px;
+}
+
+.ships_container {
+
+}
+
+/* Drag&Drop */
+.selected {
+    opacity: 0.5;
 }
