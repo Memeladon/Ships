@@ -23,6 +23,9 @@ function cellClickHandler(cell) {
         const dataBot = data['data_bot'];
         const dataPlayer = data['data_player'];
         const checkEof = data['check_eof'];
+        // 'miss', 'hit', 'break down'
+        const configListBot = data['answer_list_bot']; // бот по игроку
+        const configListBot = data['answer_list_player']; // игрок по боту
 
         // Проходим по списку списков и обновляем ячейки для бота
         for (const item of dataBot) {
@@ -85,6 +88,8 @@ function cellClickHandler(cell) {
             // обработка проигрыша игрока
             // ...
         }
+
+
     })
     .catch((error) => {
         console.error('Ошибка при отправке данных на сервер:', error);
