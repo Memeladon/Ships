@@ -15,14 +15,44 @@ function cellClickHandler(cell) {
     .then((response) => response.json())
     .then((data) => {
             // В data должен быть ключ 'data_cell', который содержит список списков
-        const dataList = data['data_cell'];
+        const dataListB = data['data_bot']; // Куда стрелял Игрок
+        const dataListP = data['data_player']; // Куда стрелял Бот
+        const check_eof = data['check_eof'];
+
+        if (dataListP != []) {
+            for (const item of dataListP) {
+                const row = item[0];
+                const col = item[1];
+                const cellValue = item[2];
+                const targetMatrix = 'player';
+
+                // Получаем ссылку на ячейку
+                const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
+
+                if (targetCell) {
+                    // Обновляем содержимое ячейки на основе значения cellValue
+                    if (cellValue === 1) {
+                        targetCell.classList.add("bg-miss");
+                        console.log("miss");
+                        addBattleLog("Player", row, col, 1);
+                    } else if (cellValue === 7) {
+                        targetCell.classList.add("bg-hit");
+                        console.log("hit");
+                        addBattleLog("Player", row, col, 7);
+                    } else {
+                        // Если значение не равно 1, 2, 8 или 9, можете сделать другую обработку по вашему усмотрению
+                        targetCell.textContent = cellValue;
+                    }
+                }
+            }
+        }
 
         // Проходим по списку списков и обновляем ячейки
-        for (const item of dataList) {
+        for (const item of dataListB) {
             const row = item[0];
             const col = item[1];
             const cellValue = item[2];
-        const targetMatrix = data['data_matrix'];
+            const targetMatrix = 'bot';
 
             // Получаем ссылку на ячейку
             const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
@@ -33,15 +63,10 @@ function cellClickHandler(cell) {
                     targetCell.classList.add("bg-miss");
                     console.log("miss");
                     addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 2) {
-                    targetCell.classList.add("bg-miss");
-                    addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 8) {
-                    targetCell.classList.add("bg-ship-front");
-                    addBattleLog("Player", row, col, 1);
-                } else if (cellValue === 9) {
+                } else if (cellValue === 7) {
                     targetCell.classList.add("bg-hit");
-                    addBattleLog("Player", row, col, 9);
+                    console.log("hit");
+                    addBattleLog("Player", row, col, 7);
                 } else {
                     // Если значение не равно 1, 2, 8 или 9, можете сделать другую обработку по вашему усмотрению
                     targetCell.textContent = cellValue;
@@ -49,7 +74,15 @@ function cellClickHandler(cell) {
             }
         }
 
-        // ход бота
+        if (check_eof == 'bot') {
+        // обработка проигрыша бота
+        }
+        else if (check_eof == 'player'){
+        // обработка проигрыша Игрока
+        }
+        // иначе False  ничего не происходит
+
+
     })
     .catch((error) => {
         console.error('Ошибка при отправке данных на сервер:', error);
