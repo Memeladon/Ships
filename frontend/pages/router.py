@@ -4,7 +4,6 @@ from fastapi.templating import Jinja2Templates
 
 from backend.entity import (CellData, MatrixItem)
 from backend.src.classes.matrix_processing import MatrixProcessing
-
 # from pyswip import Prolog
 
 
