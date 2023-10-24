@@ -43,7 +43,8 @@ async def cell_click(cell_data: CellData):
     #вернул знач
     #Промах
     #ходы бота
-    bot_coords,ans = bot.attack
+    bot_coords,ans = bot.attack(i,j)
+    final_bot_coords = []
     final_bot_coords += bot_coords 
     final_player_coords = []
     check_end_of_game_for_bot = bot.end_of_game()
