@@ -22,6 +22,7 @@ function start_game() {
     const logElement = document.querySelector('.log-board .log-message');
     const randomPlacementButton = document.getElementById('randomPlacementButton');
     const startGameButton = document.getElementById('startGameButton');
+    const resetShipButton = document.getElementById('resetShipsButton');
     const menuBoard = document.querySelector('.menu-board');
     const logBoard = document.querySelector('.log-board');
 
@@ -40,6 +41,7 @@ function start_game() {
             addPlacementLog('Начало игры.');
             randomPlacementButton.classList.add('disabled');
             startGameButton.classList.add('disabled');
+            resetShipButton.classList.add('disabled');
 
             const player_cells = document.querySelectorAll('.player-board .cell');
             for (let i = 0; i < player_cells.length; i++) {
