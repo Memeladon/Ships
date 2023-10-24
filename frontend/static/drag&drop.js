@@ -84,30 +84,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Проверяет, можно ли разместить корабль на данной позиции
     function canPlaceShip(i, j, length) {
-        if (shipOrientation === "horizontal") {
-            // Проверка выхода за границы поля и наличия других кораблей
-            for (let l = 0; l < length; l++) {
-                if (j + l >= 10) {
-                    console.log('not Canplaceship');
-                    return false;
+        const checkAround = (i, j) => {
+            for (let x = -1; x <= 1; x++) {
+                for (let y = -1; y <= 1; y++) {
+                    const aroundCell = document.querySelector(`[data-i='${i + x}'][data-j='${j + y}']`);
+                    if (aroundCell && aroundCell.getAttribute('data-value') === '8') {
+                        return false;
+                    }
                 }
-                const targetCell = document.querySelector(`[data-i='${i}'][data-j='${j + l}']`);
+            }
+            return true;
+        };
 
-                // Проверка на значения 6 и 8 для ячеек корабля
-                if (targetCell.getAttribute('data-value') == '8' || targetCell.getAttribute('data-value') == '6') {
+        if (shipOrientation === "horizontal") {
+            for (let l = 0; l < length; l++) {
+                if (j + l >= 10 || !checkAround(i, j + l)) {
                     console.log('not Canplaceship');
                     return false;
                 }
             }
         } else {
-            // Логика для вертикальной ориентации
             for (let l = 0; l < length; l++) {
-                if (i + l >= 10) {
-                    console.log('not Canplaceship');
-                    return false;
-                }
-                const targetCell = document.querySelector(`[data-i='${i + l}'][data-j='${j}']`);
-                if (targetCell.getAttribute('data-value') == '8' || targetCell.getAttribute('data-value') == '6') {
+                if (i + l >= 10 || !checkAround(i + l, j)) {
                     console.log('not Canplaceship');
                     return false;
                 }
@@ -116,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Canplaceship');
         return true;
     }
+
 
 
 
@@ -129,32 +128,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cell = document.querySelector(`[data-i='${i}'][data-j='${j + l}']`);
                 cell.classList.add('ship-cell');
                 cell.setAttribute('data-value', '8');
-
-                // Обновление ячеек вокруг корабля
-                for (let x = -1; x <= 1; x++) {
-                    for (let y = -1; y <= 1; y++) {
-                        const aroundCell = document.querySelector(`[data-i='${i + x}'][data-j='${j + l + y}']`);
-                        if (aroundCell && aroundCell.getAttribute('data-value') !== '8') {
-                            aroundCell.setAttribute('data-value', '6');
-                        }
-                    }
-                }
             }
-        } else { // вертикальная ориентация
+        } else {
             for (let l = 0; l < length; l++) {
                 const cell = document.querySelector(`[data-i='${i + l}'][data-j='${j}']`);
                 cell.classList.add('ship-cell');
                 cell.setAttribute('data-value', '8');
-
-                // Обновление ячеек вокруг корабля
-                for (let x = -1; x <= 1; x++) {
-                    for (let y = -1; y <= 1; y++) {
-                        const aroundCell = document.querySelector(`[data-i='${i + l + x}'][data-j='${j + y}']`);
-                        if (aroundCell && aroundCell.getAttribute('data-value') !== '8') {
-                            aroundCell.setAttribute('data-value', '6');
-                        }
-                    }
-                }
             }
         }
         draggedShip.remove();

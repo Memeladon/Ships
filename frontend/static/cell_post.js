@@ -3,6 +3,12 @@ function cellClickHandler(cell) {
     const i = cell.getAttribute('data-i');
     const j = cell.getAttribute('data-j');
     const value = cell.getAttribute('data-value');
+    const side = cell.getAttribute('data-matrix');
+    console.log(side);
+
+    // Хз можно так или нет. Если что исправить тут
+    // Это для того, чтобы при нажатии на клетку игра на стадии расстановки кораблей не обрабатывались клетки бота
+    if (side === 'player') return;
 
     // Отправляем координаты на сервер с помощью AJAX (XMLHttpRequest или Fetch API)
     fetch('/api/cell-click', {
