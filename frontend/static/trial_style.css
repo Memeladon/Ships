@@ -188,7 +188,7 @@ img:hover {
 
 .ship-cell {
     background-color: navy;
-    /*pointer-events: none;*/
+    pointer-events: none;
 }
 
 /* -- Drag&Drop = D&D --------------------------------------------------------------------------------------------- */
