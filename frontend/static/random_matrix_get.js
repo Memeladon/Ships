@@ -1,5 +1,5 @@
 // Функция для обработки клика на кнопку 'Random Placement'
-function generateClickHandler(side) {
+function generateClickHandler(side, clearBoard = true) {
 
     // Согласование рандомной и ручной расстановки
     function clearShipsFromPool() {
@@ -8,7 +8,7 @@ function generateClickHandler(side) {
             shipsContainer.firstChild.remove();
         }
     }
-    resetShips();
+    resetShips(clearBoard);
     clearShipsFromPool();
 
 
