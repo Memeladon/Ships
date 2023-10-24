@@ -22,7 +22,7 @@ function cellClickHandler(cell) {
             const row = item[0];
             const col = item[1];
             const cellValue = item[2];
-            const targetMatrix = item[3];
+        const targetMatrix = data['data_matrix'];
 
             // Получаем ссылку на ячейку
             const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);

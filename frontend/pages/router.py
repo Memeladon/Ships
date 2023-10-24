@@ -44,8 +44,8 @@ async def cell_click(cell_data: CellData):
     # 1 - miss
     # 2 - hit
     new_value = value + 1
-    result_data = [[i, j, new_value, matrix]]
-    return {'data_cell': result_data}
+    result_data = [[i, j, new_value]]
+    return {'data_cell': result_data, 'data_matrix': matrix}
 
 
 @router.post("/api/initialize_matrix")
