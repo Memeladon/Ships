@@ -100,15 +100,14 @@ class MatrixProcessing(object):
     def have_ship_got_any_cell(self, i, j):
         vertically = False
         # Корабль стоит вертикально?
-        print(i,j)
+
         if ((i != 9 and (self.matrix[i + 1][j] == 7 or self.matrix[i + 1][j] == 8)) or
             (i != 0 and (self.matrix[i - 1][j] == 7 or self.matrix[i - 1][j] == 8))):
             vertically = True
 
         else:
           vertically = False
-        print(vertically)
-        print(vertically)
+
         if vertically == True:
            for k in range(i+1, 10):
              if self.matrix[k][j] == 8:
@@ -134,9 +133,6 @@ class MatrixProcessing(object):
         return False
 
     def attack(self, i, j):
-        print("<<<<<<<<<<<<")
-        print(i,j)
-        print(">>>>>>>>>>>")
 
         ans = ""
         changed_coords = []
@@ -152,9 +148,6 @@ class MatrixProcessing(object):
             #добавить i,j 7
             ans = "hit"
             # осталась ли хоть одна целая часть корабля
-            print("CHECK")
-            print(self.have_ship_got_any_cell(i, j))
-            print(i,j)
             if (not self.have_ship_got_any_cell(i, j)):  # низ
                 #удалить из списка 1-й элемент
                 changed_coords.pop(0)
@@ -253,10 +246,7 @@ class MatrixProcessing(object):
             self.matrix[i][j] = 7
         else:
             self.matrix[i][j] = 1
-        print("XXXXXXXXx")
-        print(self.matrix)
-        print("HHHHHHH")
-        print(self.hidden_war_place)
+
         return changed_coords,ans
 
 
