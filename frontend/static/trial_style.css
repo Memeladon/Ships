@@ -187,7 +187,7 @@ img:hover {
 /* Расположение корабля через js */
 
 .ship-cell {
-    background-color: navy;
+    background-color: goldenrod;
     pointer-events: none;
 }
 
@@ -220,7 +220,7 @@ img:hover {
     flex: 1;
     height: 32px;
     margin: 15px;
-    background-color: navy;
+    background-color: goldenrod;
     transition: width 0.3s, height 0.3s;
 }
 
@@ -297,4 +297,33 @@ img:hover {
 /* Drag&Drop */
 .selected {
     opacity: 0.5;
+}
+
+/* -- Анимации --------------------------------------------------------------------------------------- */
+
+/* Анимация попадания */
+/* Анимация попадания */
+/* Анимация попадания */
+/* Анимация попадания - эффект взрыва */
+/* Анимация вдавливания */
+@keyframes hitAnimation {
+    0%, 100% {
+        filter: brightness(100%);
+        transform: scale(1);
+    }
+    50% {
+        filter: brightness(70%);
+        transform: scale(0.95);
+    }
+}
+
+
+/* Анимация промаха */
+@keyframes missAnimation {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
 }

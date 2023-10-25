@@ -25,7 +25,8 @@ function cellClickHandler(cell) {
         const checkEof = data['check_eof'];
         // 'miss', 'hit', 'break down'
         const configListBot = data['answer_list_bot']; // бот по игроку
-        const configListBot = data['answer_list_player']; // игрок по боту
+        const configListPlayer = data['answer_list_player']; // игрок по боту
+
 
         // Проходим по списку списков и обновляем ячейки для бота
         for (const item of dataBot) {
@@ -38,19 +39,29 @@ function cellClickHandler(cell) {
             const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
             console.log(targetCell)
 
+            const animationDuration = 300;
+
             if (targetCell) {
                 // Обновляем содержимое ячейки на основе значения cellValue
                 if (cellValue === 1) {
                     targetCell.classList.add("bg-miss");
                     console.log("miss");
-                    addBattleLog("Player", row, col, 1);
+                    addBattleLog("Игрок", row, col, 1);
+                    targetCell.style.animation = 'missAnimation 0.5s';
                 } else if (cellValue === 7) {
                     targetCell.classList.add("bg-hit");
                     console.log("hit");
-                    addBattleLog("Player", row, col, 7);
+                    addBattleLog("Игрок", row, col, 7);
+                    targetCell.style.animation = 'hitAnimation 0.5s';
                 } else {
                     targetCell.textContent = cellValue;
                 }
+                targetCell.addEventListener('animationend', function() {
+                    targetCell.style.animation = '';
+                }, { once: true });
+                setTimeout(() => {
+                    // Весь код, который должен выполняться после анимации, поместите сюда
+                }, animationDuration);
             }
         }
 
@@ -64,45 +75,72 @@ function cellClickHandler(cell) {
             // Получаем ссылку на ячейку
             const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
 
+            const animationDuration = 300;
+
             if (targetCell) {
                 // Обновляем содержимое ячейки на основе значения cellValue
                 if (cellValue === 1) {
                     targetCell.classList.add("bg-miss");
                     console.log("miss");
-                    addBattleLog("Player", row, col, 1);
+                    addBattleLog("Бот", row, col, 1);
+                    targetCell.style.animation = 'missAnimation 0.5s';
                 } else if (cellValue === 7) {
                     targetCell.classList.add("bg-hit");
                     console.log("hit");
-                    addBattleLog("Player", row, col, 7);
+                    addBattleLog("Бот", row, col, 7);
+                    targetCell.style.animation = 'hitAnimation 0.5s';
                 } else {
                     targetCell.textContent = cellValue;
                 }
+                targetCell.addEventListener('animationend', function() {
+                    targetCell.style.animation = '';
+                }, { once: true });
+                setTimeout(() => {
+                    // Весь код, который должен выполняться после анимации, поместите сюда
+                }, animationDuration);
             }
         }
 
         // Обработка условия конца игры
         if (checkEof === 'bot') {
+            console.log('bot');
+            addPlacementLog('Вы победили! Congratulations!');
             // обработка проигрыша бота
             // ...
         } else if (checkEof === 'player') {
+            console.log('player');
+            addPlacementLog('Победил бот! Noob!');
             // обработка проигрыша игрока
             // ...
+        }
+        // Блокируем ячейки после победы/поражения
+        if (checkEof === 'bot' || checkEof === 'player') {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                cell.style.pointerEvents = 'none'; // предотвращает клики
+            });
         }
 
         // лог для ходов бота
         if (configListBot.length > 0) {
             for (const item of configListBot){
-                if (item == 'miss'){}
-                if (item == 'hit'){}
-                if (item == 'break_down'){}
+                if (item === 'miss'){}
+                if (item === 'hit'){}
+                if (item === 'break_down'){
+                    alert("break_down");
+                    addPlacementLog("Игрок: Корабль потоплен!");
+                }
             }
         }
 
         // лог для ходов игрока
         for (const item of configListPlayer){
-            if i(tem == 'miss'){}
-            if (item == 'hit'){}
-            if (item == 'break_down'){}
+            if (item === 'miss'){}
+            if (item === 'hit'){}
+            if (item === 'break_down'){
+                alert("break_down");
+                addPlacementLog("Бот: Корабль потоплен!");
+            }
         }
 
     })
