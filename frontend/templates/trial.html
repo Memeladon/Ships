@@ -33,7 +33,7 @@
                 </table>
             </div>
             <div class="board menu-board">
-                <h2>Расставьте корабли</h2>
+                <h2>Док кораблей</h2>
                 <div id="ships-container" class="ships_container">
                     <li>
                         <div id="fourdeck1" class="ship" draggable="true" data-length="4" data-ship-orientation="horizontal"></div>
@@ -77,7 +77,7 @@
                     <div class="buttons">
                         <li class="buttons__item">
                             <span class="buttons__inner">
-                                <span class="buttons__title" id="congratulationRestartGame" onclick="restartGame();">Play Again</span>
+                                <span class="buttons__title" id="congratulationRestartGame" onclick="restartGame();">Играть снова</span>
                             </span>
                         </li>
                     </div>
@@ -91,22 +91,22 @@
                 <ul class="buttons">
                     <li class="buttons__item buttons__item-firstChild">
                         <span class="buttons__inner">
-                            <span class="buttons__title" id="randomPlacementButton" onclick="if(!this.classList.contains('disabled')) generateClickHandler('player')">Random Placement</span>
+                            <span class="buttons__title" id="randomPlacementButton" onclick="if(!this.classList.contains('disabled')) generateClickHandler('player')">Случайное размещение кораблей</span>
                         </span>
                     </li>
                     <li class="buttons__item">
                         <span class="buttons__inner">
-                            <span class="buttons__title" id="resetShipsButton" onclick="resetShips()">Return Ships to Pool</span>
+                            <span class="buttons__title" id="resetShipsButton" onclick="resetShips()">Возвращение кораблей в док</span>
                         </span>
                     </li>
                     <li class="buttons__item">
                         <span class="buttons__inner">
-                            <span class="buttons__title" onclick="restartGame()">Restart Game</span>
+                            <span class="buttons__title" onclick="restartGame()">Новая игра</span>
                         </span>
                     </li>
                     <li class="buttons__item buttons__item-lastChild">
                         <span class="buttons__inner">
-                            <span class="buttons__title" id="startGameButton" onclick="if(!this.classList.contains('disabled')) start_game()">Start Game</span>
+                            <span class="buttons__title" id="startGameButton" onclick="if(!this.classList.contains('disabled')) start_game()">Начать игру</span>
                         </span>
                     </li>
 
