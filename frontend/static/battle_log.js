@@ -37,3 +37,24 @@ function addBattleLog(playerName, x, y, status) {
 
     logContainer.scrollTop = logContainer.scrollHeight;  // автоматическая прокрутка вниз
 }
+
+function showCongratulations(winner) {
+    let gifPath;
+    let message;
+    if (winner === 'player') {
+        gifPath = 'frontend/static/emotes/peepoSmash.gif';
+        message = 'Поздравляем! Вы выиграли!';
+    } else if (winner === 'bot') {
+        gifPath = 'frontend/static/emotes/PeepoNoob.gif';
+        message = 'Бот выиграл. Попробуйте снова!';
+    }
+
+    const gifElement = document.getElementById('congratulations-gif');
+    const messageElement = document.getElementById('congratulations-message');
+
+    gifElement.src = gifPath;
+    messageElement.textContent = message;
+
+    // Показываем блок с поздравлениями
+    document.getElementById('congratulations').style.display = 'block';
+}
