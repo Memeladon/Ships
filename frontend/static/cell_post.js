@@ -4,7 +4,6 @@ function cellClickHandler(cell) {
     const j = cell.getAttribute('data-j');
     const value = cell.getAttribute('data-value');
     const side = cell.getAttribute('data-matrix');
-    console.log(side);
 
     // Хз можно так или нет. Если что исправить тут
     // Это для того, чтобы при нажатии на клетку игра на стадии расстановки кораблей не обрабатывались клетки бота
@@ -27,6 +26,7 @@ function cellClickHandler(cell) {
         const configListBot = data['answer_list_bot']; // бот по игроку
         const configListPlayer = data['answer_list_player']; // игрок по боту
 
+        console.log(configListBot, '   ', configListPlayer)
 
         // Проходим по списку списков и обновляем ячейки для бота
         for (const item of dataBot) {
@@ -37,7 +37,7 @@ function cellClickHandler(cell) {
 
             // Получаем ссылку на ячейку
             const targetCell = document.querySelector(`[data-matrix="${targetMatrix}"][data-i="${row}"][data-j="${col}"]`);
-            console.log(targetCell)
+//            console.log(targetCell)
 
             const animationDuration = 300;
 
