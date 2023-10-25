@@ -46,7 +46,7 @@ function cellClickHandler(cell) {
                 if (cellValue === 1) {
                     targetCell.classList.add("bg-miss");
                     console.log("miss");
-                    addBattleLog("Игрок", row, col, 1);
+//                    addBattleLog("Игрок", row, col, 1);
                     targetCell.style.animation = 'missAnimation 0.5s';
                 } else if (cellValue === 7) {
                     targetCell.classList.add("bg-hit");
@@ -82,7 +82,7 @@ function cellClickHandler(cell) {
                 if (cellValue === 1) {
                     targetCell.classList.add("bg-miss");
                     console.log("miss");
-                    addBattleLog("Бот", row, col, 1);
+//                    addBattleLog("Бот", row, col, 1);
                     targetCell.style.animation = 'missAnimation 0.5s';
                 } else if (cellValue === 7) {
                     targetCell.classList.add("bg-hit");
@@ -143,9 +143,8 @@ function cellClickHandler(cell) {
             for (const item of configListBot){
                 if (item === 'miss'){}
                 if (item === 'hit'){}
-                if (item === 'break_down'){
-                    alert("break_down");
-                    addPlacementLog("Игрок: Корабль потоплен!");
+                if (item === 'break down'){
+                    addPlacementLog("Корабль игрока потоплен!");
                 }
             }
         }
@@ -154,9 +153,8 @@ function cellClickHandler(cell) {
         for (const item of configListPlayer){
             if (item === 'miss'){}
             if (item === 'hit'){}
-            if (item === 'break_down'){
-                alert("break_down");
-                addPlacementLog("Бот: Корабль потоплен!");
+            if (item === 'break down'){
+                addPlacementLog("Корабль бота потоплен!");
             }
         }
 
