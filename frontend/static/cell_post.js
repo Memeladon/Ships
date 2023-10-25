@@ -120,6 +120,23 @@ function cellClickHandler(cell) {
                 cell.style.pointerEvents = 'none'; // предотвращает клики
             });
         }
+        if (checkEof === 'bot' || checkEof === 'player') {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                cell.style.pointerEvents = 'none'; // предотвращает клики
+            });
+
+            // Показать блок поздравления
+            const congratsBlock = document.getElementById("congratulations");
+            const congratsMessage = document.getElementById("congratulations-message");
+            if (checkEof === 'bot') {
+                congratsMessage.textContent = "Поздравляем, вы выиграли!";
+            } else {
+                congratsMessage.textContent = "Поздравляем, бот выиграли!";
+            }
+            congratsBlock.style.display = "block";
+        }
+
 
         // лог для ходов бота
         if (configListBot.length > 0) {

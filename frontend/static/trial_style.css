@@ -326,3 +326,9 @@ img:hover {
         opacity: 0.5;
     }
 }
+
+#congratulations-gif {
+    display: block;
+    margin: 0 auto 20px auto; /* центрирование по горизонтали и отступ снизу */
+}
+
