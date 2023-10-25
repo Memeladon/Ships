@@ -57,7 +57,8 @@ async def cell_click(cell_data: CellData):
     check_end_of_game_for_bot = bot.end_of_game()
 
     if check_end_of_game_for_bot:
-        return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'bot','answer_list_player': answer_list_player,'answer_list_bot': answer_list_bot}
+        return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'bot',
+                'answer_list_player': answer_list_player, 'answer_list_bot': answer_list_bot}
     if ans == "miss":
         ans = ""
         while ans != "miss":
@@ -73,7 +74,8 @@ async def cell_click(cell_data: CellData):
 
             if check_end_of_game_for_player:
                 return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': 'player','answer_list_player': answer_list_player,'answer_list_bot': answer_list_bot}
-    return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': False,'answer_list_player': answer_list_player,'answer_list_bot': answer_list_bot}
+    return {'data_bot': final_bot_coords, 'data_player': final_player_coords, 'check_eof': False,
+            'answer_list_player': answer_list_player, 'answer_list_bot': answer_list_bot}
 
 
 @router.post("/api/initialize_matrix")

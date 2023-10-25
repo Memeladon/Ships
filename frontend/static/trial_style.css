@@ -117,7 +117,7 @@ h2 {
 }
 
 .buttons__item:hover {
-    background: #008B8B;
+    background: #A0D5F9;
     color: #FFF;
 }
 
@@ -131,7 +131,6 @@ h2 {
 
 .buttons__title {
     font-family: 'Chalkduster', sans-serif;
-    color: #333; /* Темно-серый цвет */
 }
 
 .buttons__title.disabled {
@@ -187,7 +186,7 @@ img:hover {
 /* Расположение корабля через js */
 
 .ship-cell {
-    background-color: navy;
+    background-color: #A0D5F9;
     pointer-events: none;
 }
 
@@ -220,7 +219,7 @@ img:hover {
     flex: 1;
     height: 32px;
     margin: 15px;
-    background-color: navy;
+    background-color: #A0D5F9;
     transition: width 0.3s, height 0.3s;
 }
 
