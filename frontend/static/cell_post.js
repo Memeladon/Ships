@@ -129,10 +129,14 @@ function cellClickHandler(cell) {
             // Показать блок поздравления
             const congratsBlock = document.getElementById("congratulations");
             const congratsMessage = document.getElementById("congratulations-message");
+            const win = document.getElementById("win");
+            const lost = document.getElementById("lost");
             if (checkEof === 'bot') {
-                congratsMessage.textContent = "Поздравляем, вы выиграли!";
+                congratsMessage.textContent = "Поздравляем, Вы выиграли!";
+                win.style.hidden = false;
             } else {
-                congratsMessage.textContent = "Поздравляем, бот выиграл!";
+                congratsMessage.textContent = "Поздравляем, Бот выиграл!";
+                lost.style.hidden = false;
             }
             congratsBlock.style.display = "block";
         }
