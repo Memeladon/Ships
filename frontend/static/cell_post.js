@@ -132,7 +132,7 @@ function cellClickHandler(cell) {
             if (checkEof === 'bot') {
                 congratsMessage.textContent = "Поздравляем, вы выиграли!";
             } else {
-                congratsMessage.textContent = "Поздравляем, бот выиграли!";
+                congratsMessage.textContent = "Поздравляем, бот выиграл!";
             }
             congratsBlock.style.display = "block";
         }
